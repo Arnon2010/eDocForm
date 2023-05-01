@@ -3,73 +3,132 @@
       <div class="card">
         <div class="card-header pb-0">
           <div class="d-flex align-items-center">
-            <p class="mb-0">สร้างหนังสือ</p>
+            <p class="mb-0">
+              <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> 
+              สร้างหนังสือ</p>
             <!-- <button class="btn btn-primary btn-sm ms-auto">Settings</button> -->
           </div>
         </div>
         <div class="card-body">
-          <p class="text-uppercase text-sm">User Information</p>
+          <p class="text-uppercase text-sm">ข้อมูลทั่วไป</p>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Username</label>
-                <input class="form-control" type="text" value="lucky.jesse">
+                <label for="example-text-input" class="form-control-label">วันที่หนังสือ</label>
+                <input class="form-control" type="text" value="29/05/2566">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label col-md-2">ชั้นความลับ: &nbsp;</label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">ปกติ</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">ลับ</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">ลับมาก</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">ลับทีสุด</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label col-md-2">ความเร่งด่วน: &nbsp;</label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">ปกติ</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">ด่วน</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">ด่วนมาก</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">ด่วนทีสุด</label>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Email address</label>
-                <input class="form-control" type="email" value="jesse@example.com">
+                <label for="example-text-input" class="form-control-label">ประเภทหนังสือ</label>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>บันทึกข้อความ</option>
+                  <option value="1">หนังสือภายนอก</option>
+                  <option value="2">คำสั่ง</option>
+                  <option value="3">หนังสือเวียน</option>
+                </select>
               </div>
             </div>
-            <div class="col-md-6">
+          </div>
+
+          <hr class="horizontal dark">
+          <p class="text-uppercase text-sm">ข้อมูลหนังสือ</p>
+          <div class="row">
+             <div class="col-md-4">
               <div class="form-group">
-                <label for="example-text-input" class="form-control-label">First name</label>
-                <input class="form-control" type="text" value="Jesse">
+                <label for="example-text-input" class="form-control-label">เรียน</label>
+                <input class="form-control" type="text" value="">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Last name</label>
-                <input class="form-control" type="text" value="Lucky">
+                <label for="example-text-input" class="form-control-label">เรื่อง</label>
+                <input class="form-control" type="text" value="">
+              </div>
+            </div>
+           
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label">รายละเอียดหนังสือ</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label col-md-2">อายุหนังสือ: &nbsp;</label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">1 ปี</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">5 ปี</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">10 ปี</label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <hr class="horizontal dark">
-          <p class="text-uppercase text-sm">Contact Information</p>
+          <p class="text-uppercase text-sm"></p>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Address</label>
-                <input class="form-control" type="text" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">City</label>
-                <input class="form-control" type="text" value="New York">
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Country</label>
-                <input class="form-control" type="text" value="United States">
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Postal code</label>
-                <input class="form-control" type="text" value="437300">
-              </div>
-            </div>
-          </div>
-          <hr class="horizontal dark">
-          <p class="text-uppercase text-sm">About me</p>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">About me</label>
-                <input class="form-control" type="text" value="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source.">
+                <div class="col-md-2">
+                  <a href="javascript:;" class="btn btn-primary mb-0 d-none d-lg-block">ยืนยันสร้างหนังสือ</a>
+                </div>
               </div>
             </div>
           </div>
