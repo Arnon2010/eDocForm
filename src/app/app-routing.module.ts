@@ -6,6 +6,7 @@ import { ReceiveComponent } from './pages/receive/receive.component';
 import { SendComponent } from './pages/send/send.component';
 import { SearchComponent } from './pages/search/search.component';
 import { SettingComponent } from './pages/setting/setting.component';
+import { FormNewComponent } from './pages/form-new/form-new.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'receive', component: ReceiveComponent},
   {path: 'send', component: SendComponent},
   {path: 'search', component: SearchComponent},
-  {path: 'setting', component: SettingComponent}
+  {path: 'setting', component: SettingComponent},
+  {path: 'form-new', component: FormNewComponent}
 
 ];
 

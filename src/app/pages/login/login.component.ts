@@ -4,6 +4,8 @@ import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ApiService } from '../../api.service';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -12,15 +14,19 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
   angForm: FormGroup;
+  departAllowList: any;
+
   constructor(
     private fb: FormBuilder,
     private dataService: ApiService,
     private router: Router,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private httpClient:HttpClient,
   ) {
     this.angForm = this.fb.group({
       ePassport: ['',Validators.required],
-      Password: ['', Validators.required]
+      Password: ['', Validators.required],
+      depart_allow: ['', Validators.required]
     });
   }
   ngAfterViewInit() {
@@ -50,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   postdata(angForm1: any) {
     this.dataService
-      .userlogin(angForm1.value.ePassport, angForm1.value.Password)
+      .userlogin(angForm1.value.ePassport, angForm1.value.Password, angForm1.value.depart_allow)
       .pipe(first())
       .subscribe(
         (data) => {
@@ -69,6 +75,25 @@ export class LoginComponent implements OnInit {
           this.errorAlertBox('ชื่อผู้ใช้ หรือรหัสผ่านของท่านไม่ถูกต้อง!', 'กรุณาลองใหม่อีกครั้ง');
         }
       );
+  }
+
+  // check user allow more departments.
+  // checkUserAllow(id: any) {
+  //   this.dataService.checkUser(id)
+  //   .pipe(first())
+  //   .subscribe((res) => {
+  //     console.log('allow dept: ',res);
+  //     this.departAllowList = res;
+  //   })
+  // }
+
+  // 
+  checkUserAllow(id: any) {
+    this.httpClient.get(environment.baseUrl + '/login/_user_check_unique.php?user=' + id)
+    .subscribe((res) => {
+      console.log('allow dept: ',res);
+      this.departAllowList = res;
+    })
   }
 
   get email() {

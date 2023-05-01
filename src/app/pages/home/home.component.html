@@ -5,19 +5,19 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-uppercase font-weight-bold">หนังสือเข้า</p>
+              <p class="text-sm mb-0 text-uppercase font-weight-bold"><a href="#" routerLink="/order">หนังสือเข้า</a></p>
               <h5 class="font-weight-bolder">
-                10
+                {{orderIncome}}
               </h5>
               <!-- <p class="mb-0">
-                  <span class="text-success text-sm font-weight-bolder">+55%</span>
-                  since yesterday
+                  รายการวันนี้
+                  <span class="text-success text-sm font-weight-bolder">+5</span>
                 </p> -->
             </div>
           </div>
           <div class="col-4 text-end">
             <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-              <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+              <a href="#" routerLink="/order"><i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -30,19 +30,15 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-uppercase font-weight-bold">หนังสือส่งต่อ</p>
+              <p class="text-sm mb-0 text-uppercase font-weight-bold"><a href="#" routerLink="/sendto">หนังสือส่งต่อ</a></p>
               <h5 class="font-weight-bolder">
-                5
+                {{orderForward}}
               </h5>
-              <!-- <p class="mb-0">
-                  <span class="text-success text-sm font-weight-bolder">+3%</span>
-                  since last week
-                </p> -->
             </div>
           </div>
           <div class="col-4 text-end">
             <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-              <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+              <a href="#" routerLink="/sendto"><i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -55,9 +51,9 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-uppercase font-weight-bold">หนังสือลงนาม</p>
+              <p class="text-sm mb-0 text-uppercase font-weight-bold"><a href="#" routerLink="/send-sign">หนังสือลงนาม</a></p>
               <h5 class="font-weight-bolder">
-                3
+                {{orderApprovSend}}
               </h5>
               <!-- <p class="mb-0">
                   <span class="text-danger text-sm font-weight-bolder">-2%</span>
@@ -67,7 +63,7 @@
           </div>
           <div class="col-4 text-end">
             <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-              <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+              <a href="#" routerLink="/send-report"><i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -80,9 +76,9 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-uppercase font-weight-bold">หนังสือเกษียน</p>
+              <p class="text-sm mb-0 text-uppercase font-weight-bold"><a href="#" routerLink="/sign-recive">หนังสือเกษียน</a></p>
               <h5 class="font-weight-bolder">
-                20
+                {{orderApprovReceive}}
               </h5>
               <!-- <p class="mb-0">
                   <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
@@ -91,7 +87,7 @@
           </div>
           <div class="col-4 text-end">
             <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-              <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+              <a href="#" routerLink="/list"><i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>

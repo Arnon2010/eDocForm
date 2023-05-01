@@ -10,15 +10,20 @@
                 <div class="card-body">
                   <form role="form" [formGroup]="angForm" (ngSubmit)="postdata(angForm)" autocomplete="off">
                     <div class="mb-3">
-                      <input type="text" formControlName="ePassport" class="form-control form-control-lg" placeholder="e-Passport" aria-label="Email">
+                      <input type="text" formControlName="ePassport" (ngModelChange)="checkUserAllow($event)" class="form-control form-control-lg" placeholder="e-Passport" aria-label="e-Passport">
                     </div>
                     <div class="mb-3">
                       <input type="password" formControlName="Password" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
                     </div>
-                    <div class="form-check form-switch">
+                    <div class="mb-3">
+                      <select formControlName="depart_allow" class="form-control form-control-lg">
+                        <option *ngFor="let item of departAllowList.dept" value="{{item.Id}}">{{item.Name}}</option>
+                      </select>
+                    </div>
+                    <!-- <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe">
                       <label class="form-check-label" for="rememberMe">Remember me</label>
-                    </div>
+                    </div> -->
                     <div class="text-center">
                       <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">เข้าสู่ระบบ</button>
                     </div>

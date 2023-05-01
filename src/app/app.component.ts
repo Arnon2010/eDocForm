@@ -13,11 +13,11 @@ declare interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
 { path: '/home', title: 'หน้าหลัก',  icon: 'ni-tv-2 text-primary', class: '' },
-{ path: '/receive', title: 'หนังสือเข้า',  icon:'ni-planet text-blue', class: '' },
-{ path: '/send', title: 'หนังสือออก',  icon:'ni-pin-3 text-orange', class: '' },
-{ path: '/setting', title: 'แก้ไขและบันทึก',  icon:'ni-single-02 text-yellow', class: '' },
-{ path: '/search', title: 'ค้นหา',  icon:'ni-bullet-list-67 text-red', class: '' },
-{ path: '/register', title: 'จองเลขหนังสือ',  icon:'ni-key-25 text-info', class: '' }
+{ path: '/receive', title: 'หนังสือรับ',  icon:'ni-paper-diploma text-blue', class: '' },
+{ path: '/send', title: 'หนังสือส่ง',  icon:'fa fa-paper-plane-o text-orange', class: '' },
+{ path: '/setting', title: 'แก้ไขและบันทึก',  icon:'ni-settings-gear-65 text-yellow', class: '' },
+{ path: '/search', title: 'ค้นหา',  icon:'fa fa-search text-red', class: '' },
+//{ path: '/register', title: 'จองเลขหนังสือ',  icon:'ni-key-25 text-info', class: '' }
 ];
 
 @Component({
@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
 
         const token:any = this.dataService.getToken();
         let user = JSON.parse(token);
-        //console.log('token user: ', user);
+        console.log('token user: ', user);
         var _user_role = user.user_role;
         this.userRole = _user_role;
         this.facName = user.fac_name;

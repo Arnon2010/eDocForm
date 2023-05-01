@@ -19,7 +19,7 @@ export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
   /** LOGIN */
-  public userlogin(User: string, Pass: string) {
+  public userlogin(User: string, Pass: string, depart_allow: string) {
 
     const httpOptions = {
  	 	  headers: new HttpHeaders()
@@ -31,7 +31,7 @@ export class ApiService {
     //httpOptions.headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 	  //this.httpClient.post(<url>, <body>, httpOptions);
     return this.httpClient
-      .post<any>(environment.baseUrl + '/login/login.php', { User, Pass }, httpOptions)
+      .post<any>(environment.baseUrl + '/login/login.php', { User, Pass, depart_allow }, httpOptions)
       .pipe(
         map((Users) => {
           this.setToken(Users[0]);
@@ -39,6 +39,36 @@ export class ApiService {
           return Users;
         })
       );
+  }
+
+  // check user allow more departments
+  checkUser(id: any){
+    let api = environment.baseUrl + '/login/_user_check_unique.php?user=' + id;
+    return this.httpClient.get(api, { headers: this.headers}).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  // multiply(factor: number | ((source: Example) => number)) {
+  //   return (source: Observable<Example>) =>
+  //     source.pipe(map(value => {
+  //       const f = typeof factor === 'function' ? factor(value) : factor;
+  //       return value.val * f;
+  //     }))
+  // }
+
+  // 
+  getOrderSignReceive(id: any) {
+    let api = environment.baseUrl + '/receive/_approv_doc_amount.php?depart_id=' + id;
+    return this.httpClient.get(api, { headers: this.headers }).pipe(
+      map((res:any) => {
+        return res[0].amountOrder;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   // User profile

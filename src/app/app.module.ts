@@ -17,6 +17,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormNewComponent } from './pages/form-new/form-new.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { RouterModule } from '@angular/router';
     ReceiveComponent,
     SearchComponent,
     SystemComponent,
-    SettingComponent
+    SettingComponent,
+    FormNewComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   providers: [{provide:LocationStrategy, useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
