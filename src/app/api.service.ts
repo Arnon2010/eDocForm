@@ -71,6 +71,32 @@ export class ApiService {
     );
   }
 
+  //
+
+  // ประเภทหนังสือ
+  public apiDocTypeList() {
+    let api = environment.baseUrl + '/system/_doctype_list.php';
+    return this.httpClient.get(api, { headers: this.headers })
+    .pipe(map((res:any) => {
+        //console.log('doc type from api: ',res.data);
+        return res.data || [];
+    }),
+    catchError(this.handleError)
+    );
+  }
+
+  // หน่วนงานส่วนราชการ
+  public apiDeptGovernment(id: any) {
+    let api = environment.baseUrl + '/system/_dept_government__list.php?depart_id=' + id;
+    return this.httpClient.get(api, { headers: this.headers })
+    .pipe(map((res:any) => {
+        //console.log('doc type from api: ',res.data);
+        return res.data || [];
+    }),
+    catchError(this.handleError)
+    );
+  }
+
   // User profile
   //  getUserProfile(id: any) {
   //   let api = environment.baseUrl + '/userProfile.php?id=' + id;

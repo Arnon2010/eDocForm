@@ -45,9 +45,8 @@ export class HomeComponent implements OnInit {
     let user = JSON.parse(token);
     var departId = user.depart_id;
     var userType = user.usertype_code;
-
-    console.log('user: ', user);
-
+    
+    //console.log('user: ', user);
     this.amountOrderApprovReceive(departId);
     this.amountOrder(departId);
     this.amountSendto(departId);
@@ -66,9 +65,8 @@ export class HomeComponent implements OnInit {
   amountOrderApprovReceive(depart_id:any) {
     this.httpClient.get(environment.baseUrl + '/receive/_approv_doc_amount.php?depart_id=' + depart_id)
     .subscribe((res:any) => {
-      //console.log('amount order apporv receive: ',res);
       this.orderApprovReceive = res.data[0].amountOrder;
-      console.log('orderApprovReceive: ',this.orderApprovReceive);
+      //console.log('orderApprovReceive: ',this.orderApprovReceive);
     })
   }
 
@@ -76,7 +74,7 @@ export class HomeComponent implements OnInit {
   amountOrder(depart_id:any){
       this.httpClient.get(environment.baseUrl + "/receive/_edoc_amount_order.php?depart_iduser=" + depart_id)
       .subscribe((res:any) => {
-        console.log('Order: ',res);
+        //console.log('Order: ',res);
         this.orderIncome = res.data[0].amountOrder;
       })
   }

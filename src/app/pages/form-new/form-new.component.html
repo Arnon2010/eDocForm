@@ -6,132 +6,151 @@
             <p class="mb-0">
               <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> 
               สร้างหนังสือ</p>
-            <!-- <button class="btn btn-primary btn-sm ms-auto">Settings</button> -->
+            <button class="btn btn-primary btn-sm ms-auto">Template</button>
           </div>
         </div>
         <div class="card-body">
-          <p class="text-uppercase text-sm">ข้อมูลทั่วไป</p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">วันที่หนังสือ</label>
-                <input class="form-control" type="text" value="29/05/2566">
-              </div>
-            </div>
-            <div class="form-group row">
+          <form role="form" [formGroup]="creatForm" (ngSubmit)="postdata(creatForm)" autocomplete="on">
+            <p class="text-uppercase text-sm">ข้อมูลทั่วไป</p>
+            <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="example-text-input" class="form-control-label col-md-2">ชั้นความลับ: &nbsp;</label>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">ปกติ</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">ลับ</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">ลับมาก</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">ลับทีสุด</label>
+                  <label for="example-text-input" class="form-control-label">วันที่หนังสือ</label>
+                  <input class="form-control" type="text" formControlName="docDate" value="29/05/2566">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label col-md-2">ชั้นความลับ: &nbsp;</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="Secrets" value="1">
+                      <label class="form-check-label" for="inlineRadio1">ปกติ</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="Secrets" value="2">
+                      <label class="form-check-label" for="inlineRadio2">ลับ</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="Secrets" value="3">
+                      <label class="form-check-label" for="inlineRadio2">ลับมาก</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="Secrets" value="4">
+                      <label class="form-check-label" for="inlineRadio2">ลับทีสุด</label>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <div class="form-group row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label col-md-2">ความเร่งด่วน: &nbsp;</label>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">ปกติ</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">ด่วน</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">ด่วนมาก</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">ด่วนทีสุด</label>
+              
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label col-md-2">ความเร่งด่วน: &nbsp;</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="Rapid" value="1">
+                      <label class="form-check-label" for="inlineRadio1">ปกติ</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="Rapid" value="2">
+                      <label class="form-check-label" for="inlineRadio2">ด่วน</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="Rapid" value="3">
+                      <label class="form-check-label" for="inlineRadio2">ด่วนมาก</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="Rapid" value="4">
+                      <label class="form-check-label" for="inlineRadio2">ด่วนทีสุด</label>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">ประเภทหนังสือ</label>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>บันทึกข้อความ</option>
-                  <option value="1">หนังสือภายนอก</option>
-                  <option value="2">คำสั่ง</option>
-                  <option value="3">หนังสือเวียน</option>
-                </select>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">ประเภทหนังสือ</label>
+                  <select class="form-select" formControlName="doctypeId" aria-label="Default select example">
+                    <option *ngFor="let item of doctype_list" value="{{item.Id}}">{{item.Name}}</option>
+                  </select>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <hr class="horizontal dark">
-          <p class="text-uppercase text-sm">ข้อมูลหนังสือ</p>
-          <div class="row">
-             <div class="col-md-4">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">เรียน</label>
-                <input class="form-control" type="text" value="">
-              </div>
+
             </div>
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">เรื่อง</label>
-                <input class="form-control" type="text" value="">
-              </div>
-            </div>
-           
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">รายละเอียดหนังสือ</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-              </div>
-            </div>
-            
-            <div class="form-group row">
-              <div class="col-md-6">
+
+            <hr class="horizontal dark">
+            <p class="text-uppercase text-sm">ข้อมูลหนังสือ</p> {{deptgovernment_list}}
+            <div class="row">
+              <div class="col-md-8">
                 <div class="form-group">
-                  <label for="example-text-input" class="form-control-label col-md-2">อายุหนังสือ: &nbsp;</label>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">1 ปี</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">5 ปี</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">10 ปี</label>
+                  <label for="example-text-input" class="form-control-label">หน่วยงาน ส่วนราชการ</label>
+                  <select class="form-select" formControlName="departId_Government" aria-label="Default select example">
+                    <option *ngFor="let item of deptgovernment_list" value="{{item.Id}}">{{item.Name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">เรียน</label>
+                  <input class="form-control" type="text" value="">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">เรื่อง</label>
+                  <input class="form-control" type="text" value="">
+                </div>
+              </div>
+            
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">รายละเอียดหนังสือ</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+              </div>
+              
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label col-md-2">อายุหนังสือ: &nbsp;</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                      <label class="form-check-label" for="inlineRadio1">1 ปี</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <label class="form-check-label" for="inlineRadio2">5 ปี</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <label class="form-check-label" for="inlineRadio2">10 ปี</label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <hr class="horizontal dark">
-          <p class="text-uppercase text-sm"></p>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <div class="col-md-2">
-                  <a href="javascript:;" class="btn btn-primary mb-0 d-none d-lg-block">ยืนยันสร้างหนังสือ</a>
+            <hr class="horizontal dark">
+            <p class="text-uppercase text-sm"></p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="d-flex align-items-center">
+                      <p class="mb-0">
+                      &nbsp;
+                      </p>
+                      <button class="btn btn-primary btn-sm ms-auto"><i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> สร้างหนังสือ</button>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-2">
+                    <a href="javascript:;" class="btn btn-primary btn-sm ms-auto">
+                      <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> สร้างหนังสือ</a>
+                  </div> -->
+
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

@@ -94,10 +94,10 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     if (this.dataService.isLoggedIn()) {
-      console.log('loggedin');
+      //console.log('loggedin');
       this.router.navigate(['/']);
     } else {
-      console.log('loggedin again...');
+      //console.log('loggedin again...');
       this.router.navigate(['/login']);
     }
   }
