@@ -21,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormNewComponent } from './pages/form-new/form-new.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { DocCreateComponent } from './pages/doc-create/doc-create.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     SearchComponent,
     SystemComponent,
     SettingComponent,
-    FormNewComponent
+    FormNewComponent,
+    DocCreateComponent
   ],
   imports: [
     BrowserModule,
