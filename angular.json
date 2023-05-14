@@ -32,7 +32,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vfs_fonts.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -101,7 +103,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vfs_fonts.js"
+            ]
           }
         }
       }

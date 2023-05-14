@@ -43,8 +43,8 @@ export class SendComponent implements OnInit {
     //get user profile
     const token:any = this.dataService.getToken();
     let user = JSON.parse(token);
-    var departId = user.depart_id;
-    var userType = user.usertype_code;
+    var departId = user.departId;
+    var userType = user.userType;
     //console.log('user: ', user);
 
     this.dataSend(userType, departId,'2566', 'all', 'notSearch');

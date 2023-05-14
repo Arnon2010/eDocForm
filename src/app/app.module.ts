@@ -20,6 +20,8 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormNewComponent } from './pages/form-new/form-new.component';
 
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import { FormNewComponent } from './pages/form-new/form-new.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    AngularEditorModule
   ],
   providers: [{provide:LocationStrategy, useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
