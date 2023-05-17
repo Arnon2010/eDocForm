@@ -1,3 +1,4 @@
+import { fonts } from './../../config/pdfFonts';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,9 +8,17 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
-
 declare var require: any;
+
+import {PDFDocument, PDFForm, StandardFonts, PDFFont, rgb} from 'pdf-lib';
+const fontkit = require("@pdf-lib/fontkit");
+//const fs = require('file-system');
+//const fs = require("fs");
+
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-doc-create',
@@ -25,6 +34,51 @@ export class DocCreateComponent implements OnInit {
   // rapid:boolean = true;
   doctype_list: any = [];
   deptgovernment_list: any = [];
+
+  USERS = [
+    {
+      "id": 1,
+      "name": "Leanne Graham",
+      "email": "sincere@april.biz",
+      "phone": "1-770-736-8031 x56442"
+    },
+    {
+      "id": 2,
+      "name": "Ervin Howell",
+      "email": "shanna@melissa.tv",
+      "phone": "010-692-6593 x09125"
+    },
+    {
+      "id": 3,
+      "name": "Clementine Bauch",
+      "email": "nathan@yesenia.net",
+      "phone": "1-463-123-4447",
+    },
+    {
+      "id": 4,
+      "name": "Patricia Lebsack",
+      "email": "julianne@kory.org",
+      "phone": "493-170-9623 x156"
+    },
+    {
+      "id": 5,
+      "name": "Chelsey Dietrich",
+      "email": "lucio@annie.ca",
+      "phone": "(254)954-1289"
+    },
+    {
+      "id": 6,
+      "name": "Mrs. Dennis",
+      "email": "karley@jasper.info",
+      "phone": "1-477-935-8478 x6430"
+    },
+    {
+      "id": 7,
+      "name": "นายอานนท์ หลงหัน",
+      "email": "arnn.l@rmutsv.ac.th",
+      "phone": "084-2692074"
+    },
+  ];
 
   docNew: createDocForm = {
     userid: 0,
@@ -92,6 +146,56 @@ export class DocCreateComponent implements OnInit {
   ngOnInit(): void {
       
   }
+
+  public openPDF(): void {
+    let DATA: any = document.getElementById('htmlData');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('angular-demo.pdf');
+    });
+  }
+
+  header = [['ID','Name','Email','Profile']]
+  tableData = [[1,'Bhuban', 'Bhuban@gmail.com', 'Developer'],
+              [2, 'rinkesh', 'rinkesh@yahoo.com', 'Sales'],
+              [3, 'arpit', 'arpit@yahoo.com', 'Sales'],
+              [4, 'abdul', 'abdul@yahoo.com', 'Finance'],
+              [5, 'Angel', 'Angel@yahoo.com', 'Marketing'],
+              [6, 'อานนท์', 'arnn.l@rmutsv.ac.th', 'โปรแกรมเมอร์']]
+
+  generatePdfFile() {
+    var pdf = new jsPDF();
+    const fontUrl = './../../../assets/fonts/ThaiFonts/THSarabun.ttf'; // Adjust the path to your font file
+    // Load the font
+  
+    pdf.addFont(fontUrl, 'THSarabun', 'normal');
+
+    // Set the font for the text
+    pdf.setFont('THSarabun');
+    pdf.setFontSize(20);
+    pdf.text('PDF file in Angular By Access Zombies Code ทดสอบ', 11, 8);
+
+    (pdf as any).autoTable({
+      head: this.header,
+      body: this.tableData,
+      theme: 'plain',
+      didDrawCell: (data: {column: {index: any;};}) =>{
+        console.log(data.column.index);
+      }
+    });
+
+    // Open PDF document in browser's new tab
+    pdf.output('dataurlnewwindow');
+
+    // Download PDF doc
+    pdf.save('table.pdf');
+  }
+
 
   async createPdf() {
     const pdfDoc = await PDFDocument.create()
