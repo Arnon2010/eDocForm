@@ -16,18 +16,28 @@ declare var require: any;
 // import the pdfmake library
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
-window.pdfMake = require('pdfmake/build/pdfmake.min');
-var vfs = require('pdfmake/build/vfs_fonts');
-window.pdfMake.vfs = vfs.pdfMake.vfs;
+// window.pdfMake = require('pdfmake/build/pdfmake.min');
+// var vfs = require('pdfmake/build/vfs_fonts');
+// window.pdfMake.vfs = vfs.pdfMake.vfs;
 
-import { defaultStyle, styles } from './../../config/customStyle';
-import { fonts } from './../../config/pdfFonts';
+// import { defaultStyle, styles } from './../../config/customStyle';
+// import { fonts } from './../../config/pdfFonts';
 
 // PDFMAKE fonts
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
-(pdfMake as any).fonts = fonts;
+// (pdfMake as any).fonts = fonts;
+
+(pdfMake as any).fonts = {
+  CustomFont: {
+    normal: 'THSarabun.ttf',
+    bold: 'THSarabun Bold.ttf',
+    italics: 'THSarabun Italic.ttf',
+    bolditalics: 'THSarabun Bold Italic.ttf'
+  }
+}
 
 const htmlToPdfmake = require("html-to-pdfmake");
 
@@ -58,6 +68,8 @@ const htmlToPdfmake = require("html-to-pdfmake");
 export class FormNewComponent implements OnInit {
 
   @ViewChild('pdfTable') pdfTable!: ElementRef;
+  @ViewChild('textEditor') textEditor!: ElementRef;
+
 
   creatForm: FormGroup;
   // secrets:boolean = true;
@@ -97,11 +109,10 @@ export class FormNewComponent implements OnInit {
       //     [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4']
       //   ]
       // }
-      text: string; style: string;
-    }[]; 
-    defaultStyle: { font: string; bold: boolean; color: string; fontSize: number; }; 
-    styles: { head: { font: string; bold: boolean; color: string; fontSize: number; }; };
+      text: string; font: string;
+    }[];
   } | undefined;
+
   
   constructor(
     private fb: FormBuilder,
@@ -247,47 +258,47 @@ export class FormNewComponent implements OnInit {
       });
   }
 
-  //   async createPdf () {
-  //     // Create a new PDFDocument
-  //     const pdfDoc = await PDFDocument.create()
+    async createPdf () {
+      // Create a new PDFDocument
+      const pdfDoc = await PDFDocument.create();
 
-  //     // Embed the Times Roman font
-  //     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
+      var html = htmlToPdfmake(this.docNew.doc_content);
 
-  //     // Add a blank page to the document
-  //     const page = pdfDoc.addPage()
+      // Embed the Times Roman font
+      const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
 
-  //     // Get the width and height of the page
-  //     const { width, height } = page.getSize()
+      // Add a blank page to the document
+      const page = pdfDoc.addPage()
 
-  //     // Draw a string of text toward the top of the page
-  //     const fontSize = 30
-  //     page.drawText('ทดสอบระบบ', {
-  //       x: 50,
-  //       y: height - 4 * fontSize,
-  //       size: fontSize,
-  //       font: timesRomanFont,
-  //       color: rgb(0, 0.53, 0.71),
-  //     })
+      // Get the width and height of the page
+      const { width, height } = page.getSize()
 
-  //     // Serialize the PDFDocument to bytes (a Uint8Array)
-  //     const pdfBytes = await pdfDoc.save();
-  //     this.saveByteArray('test.pdf', pdfBytes);
-  //   }
+      // Draw a string of text toward the top of the page
+      const fontSize = 30
+      page.drawText('test', {
+        x: 50,
+        y: height - 4 * fontSize,
+        size: fontSize,
+        font: timesRomanFont,
+        color: rgb(0, 0.53, 0.71),
+      })
 
-  //   saveByteArray(reportName:any, byte:any) {
-  //     var blob = new Blob([byte], {type: "application/pdf"});
-  //     var link = document.createElement('a');
-  //     link.href = window.URL.createObjectURL(blob);
-  //     var fileName = reportName;
-  //     link.download = fileName;
-  //     link.click();
-  //   };
+      // Serialize the PDFDocument to bytes (a Uint8Array)
+      const pdfBytes = await pdfDoc.save();
+      this.saveByteArray('test.pdf', pdfBytes);
+    }
 
-  createPdf() {
-    //
-  }
+    saveByteArray(reportName:any, byte:any) {
+      var blob = new Blob([byte], {type: "application/pdf"});
+      var link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      var fileName = reportName;
+      link.download = fileName;
+      link.click();
+    };
 
+
+  
   //test pdfmake
   exportPDF2() {
 
@@ -311,18 +322,17 @@ export class FormNewComponent implements OnInit {
           //     [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4']
           //   ]
           // }
-          text: "ทดสอบระบบ",
-          style: "head",
+          text: "ทดสอบระบบสารบรรณ",
+          font: "CustomFont",
           
         }
 
-      ],
-      defaultStyle,
-      styles
+      ]
+      
 
     };
-    //let pdf = pdfMake.createPdf(this.pdfContent);
-    let pdf = pdfMake.createPdf(this.pdfContent, pdfMake.tableLayouts, fonts, vfs);
+    let pdf = pdfMake.createPdf(this.pdfContent);
+    //let pdf = pdfMake.createPdf(this.pdfContent, pdfMake.tableLayouts, fonts, vfs);
     pdf.download();
 
   }

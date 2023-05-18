@@ -22,6 +22,7 @@ import { FormNewComponent } from './pages/form-new/form-new.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { DocCreateComponent } from './pages/doc-create/doc-create.component';
+import { PdfLibComponent } from './pages/pdf-lib/pdf-lib.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DocCreateComponent } from './pages/doc-create/doc-create.component';
     SystemComponent,
     SettingComponent,
     FormNewComponent,
-    DocCreateComponent
+    DocCreateComponent,
+    PdfLibComponent
   ],
   imports: [
     BrowserModule,

@@ -12,10 +12,11 @@ declare var require: any;
 
 import {PDFDocument, PDFForm, StandardFonts, PDFFont, rgb} from 'pdf-lib';
 const fontkit = require("@pdf-lib/fontkit");
+const htmlToPdfmake = require("html-to-pdfmake");
 //const fs = require('file-system');
 //const fs = require("fs");
 
-import jsPDF from "jspdf";
+import {jsPDF} from "jspdf";
 import "jspdf-autotable";
 
 import html2canvas from 'html2canvas';
@@ -28,57 +29,13 @@ import html2canvas from 'html2canvas';
 export class DocCreateComponent implements OnInit {
 
   @ViewChild('pdfTable') pdfTable!: ElementRef;
+  @ViewChild('textEditor') textEditor!: ElementRef;
 
   creatForm: FormGroup;
   // secrets:boolean = true;
   // rapid:boolean = true;
   doctype_list: any = [];
   deptgovernment_list: any = [];
-
-  USERS = [
-    {
-      "id": 1,
-      "name": "Leanne Graham",
-      "email": "sincere@april.biz",
-      "phone": "1-770-736-8031 x56442"
-    },
-    {
-      "id": 2,
-      "name": "Ervin Howell",
-      "email": "shanna@melissa.tv",
-      "phone": "010-692-6593 x09125"
-    },
-    {
-      "id": 3,
-      "name": "Clementine Bauch",
-      "email": "nathan@yesenia.net",
-      "phone": "1-463-123-4447",
-    },
-    {
-      "id": 4,
-      "name": "Patricia Lebsack",
-      "email": "julianne@kory.org",
-      "phone": "493-170-9623 x156"
-    },
-    {
-      "id": 5,
-      "name": "Chelsey Dietrich",
-      "email": "lucio@annie.ca",
-      "phone": "(254)954-1289"
-    },
-    {
-      "id": 6,
-      "name": "Mrs. Dennis",
-      "email": "karley@jasper.info",
-      "phone": "1-477-935-8478 x6430"
-    },
-    {
-      "id": 7,
-      "name": "นายอานนท์ หลงหัน",
-      "email": "arnn.l@rmutsv.ac.th",
-      "phone": "084-2692074"
-    },
-  ];
 
   docNew: createDocForm = {
     userid: 0,
@@ -160,6 +117,7 @@ export class DocCreateComponent implements OnInit {
     });
   }
 
+
   header = [['ID','Name','Email','Profile']]
   tableData = [[1,'Bhuban', 'Bhuban@gmail.com', 'Developer'],
               [2, 'rinkesh', 'rinkesh@yahoo.com', 'Sales'],
@@ -169,25 +127,48 @@ export class DocCreateComponent implements OnInit {
               [6, 'อานนท์', 'arnn.l@rmutsv.ac.th', 'โปรแกรมเมอร์']]
 
   generatePdfFile() {
-    var pdf = new jsPDF();
+    var pdf = new jsPDF("p", "mm", "a4");
+
+    var doc_content = htmlToPdfmake(this.docNew.doc_content);
+    const lines = this.docNew.comment.split('\n'); //count line
+    const lineCount = lines.length;
+    console.log('doc_content :', doc_content);
+
+    //const editorText = this.textEditor.nativeElement.innerText;
+
+    //console.log('doc_content: ',doc_content[0].text);
     const fontUrl = './../../../assets/fonts/ThaiFonts/THSarabun.ttf'; // Adjust the path to your font file
     // Load the font
+
+    
   
     pdf.addFont(fontUrl, 'THSarabun', 'normal');
 
     // Set the font for the text
     pdf.setFont('THSarabun');
-    pdf.setFontSize(20);
-    pdf.text('PDF file in Angular By Access Zombies Code ทดสอบ', 11, 8);
+    pdf.setFontSize(29);
+    pdf.text('บันทึกข้อความ', 50, 20);
+    pdf.setFontSize(16);
 
-    (pdf as any).autoTable({
-      head: this.header,
-      body: this.tableData,
-      theme: 'plain',
-      didDrawCell: (data: {column: {index: any;};}) =>{
-        console.log(data.column.index);
-      }
-    });
+    // pdf.text(this.docNew.comment, 10, 30);
+
+    // pdf.text('This is a new line.\n', 10, 35); // Add a new line
+    // pdf.text('This is another line.', 10, 40);
+    // pdf.text('\n', 10, 45); // Add a new line
+
+    var splitTitle = pdf.splitTextToSize(this.docNew.doc_content, 180);
+    pdf.text(splitTitle,10,50);
+
+    this.countWordsInLine();
+
+    // (pdf as any).autoTable({
+    //   head: this.header,
+    //   body: this.tableData,
+    //   theme: 'plain',
+    //   didDrawCell: (data: {column: {index: any;};}) =>{
+    //     console.log(data.column.index);
+    //   }
+    // });
 
     // Open PDF document in browser's new tab
     pdf.output('dataurlnewwindow');
@@ -256,6 +237,17 @@ export class DocCreateComponent implements OnInit {
       },
     ]
   };
+
+  countWordsInLine() {
+    const lines = this.docNew.comment.split('\n');
+    const lineCount = lines.length;
+    
+    for (let i = 0; i < lineCount; i++) {
+      const words = lines[i].trim().split(' ');
+      const wordCount = words.length;
+      console.log(`Number of words in line ${i + 1}: ${wordCount}`);
+    }
+  }
 
   //ประเภทหนังสือ
   docTypeList() {
