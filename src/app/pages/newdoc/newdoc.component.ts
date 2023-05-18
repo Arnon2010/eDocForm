@@ -7,11 +7,11 @@ import { first, pipe, retry } from 'rxjs';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-send',
-  templateUrl: './send.component.html',
-  styleUrls: ['./send.component.scss']
+  selector: 'app-newdoc',
+  templateUrl: './newdoc.component.html',
+  styleUrls: ['./newdoc.component.scss']
 })
-export class SendComponent implements OnInit {
+export class NewdocComponent implements OnInit {
 
   closeResult = '';
 
@@ -54,6 +54,7 @@ export class SendComponent implements OnInit {
 
 
   }
+
   
   open(content:any) {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
@@ -115,5 +116,4 @@ export class SendComponent implements OnInit {
           this.orderApprovSend = res.data[0].amountOrder;
       });
   }
-
 }

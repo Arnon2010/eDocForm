@@ -1,3 +1,4 @@
+import { NewdocComponent } from './pages/newdoc/newdoc.component';
 import { DocCreateComponent } from './pages/doc-create/doc-create.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,7 +13,7 @@ import { FormNewComponent } from './pages/form-new/form-new.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'doc-create',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {path: 'home', component: HomeComponent},
@@ -22,7 +23,9 @@ const routes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'setting', component: SettingComponent},
   {path: 'form-new', component: FormNewComponent},
-  {path: 'doc-create', component: DocCreateComponent}
+  {path: 'doc-create', component: DocCreateComponent},
+  {path: 'newdoc', component:NewdocComponent}
+
 
 ];
 

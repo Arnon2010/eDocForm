@@ -13,6 +13,7 @@ declare interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
 { path: '/home', title: 'หน้าหลัก',  icon: 'ni-tv-2 text-primary', class: '' },
+{ path: '/newdoc', title: 'สร้างหนังสือ',  icon: 'ni ni-fat-add text-primary', class: '' },
 { path: '/receive', title: 'หนังสือรับ',  icon:'ni-paper-diploma text-blue', class: '' },
 { path: '/send', title: 'หนังสือส่ง',  icon:'fa fa-paper-plane-o text-orange', class: '' },
 { path: '/setting', title: 'แก้ไขและบันทึก',  icon:'ni-settings-gear-65 text-yellow', class: '' },
