@@ -24,6 +24,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { DocCreateComponent } from './pages/doc-create/doc-create.component';
 import { PdfLibComponent } from './pages/pdf-lib/pdf-lib.component';
 import { NewdocComponent } from './pages/newdoc/newdoc.component';
+import { DocInsideComponent } from './pages/doc-inside/doc-inside.component';
+import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { NewdocComponent } from './pages/newdoc/newdoc.component';
     FormNewComponent,
     DocCreateComponent,
     PdfLibComponent,
-    NewdocComponent
+    NewdocComponent,
+    DocInsideComponent,
+    DocOusideComponent
   ],
   imports: [
     BrowserModule,

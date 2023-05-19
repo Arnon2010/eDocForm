@@ -9,6 +9,8 @@ import { SendComponent } from './pages/send/send.component';
 import { SearchComponent } from './pages/search/search.component';
 import { SettingComponent } from './pages/setting/setting.component';
 import { FormNewComponent } from './pages/form-new/form-new.component';
+import { DocInsideComponent } from './pages/doc-inside/doc-inside.component';
+import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
 
 const routes: Routes = [
   {
@@ -24,7 +26,9 @@ const routes: Routes = [
   {path: 'setting', component: SettingComponent},
   {path: 'form-new', component: FormNewComponent},
   {path: 'doc-create', component: DocCreateComponent},
-  {path: 'newdoc', component:NewdocComponent}
+  {path: 'newdoc', component:NewdocComponent},
+  {path: 'doc-inside', component:DocInsideComponent},
+  {path: 'doc-outside', component:DocOusideComponent}
 
 
 ];

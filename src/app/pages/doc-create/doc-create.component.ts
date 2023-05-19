@@ -39,7 +39,7 @@ export class DocCreateComponent implements OnInit {
 
   docNew: createDocForm = {
     userid: 0,
-    docdate: '10/05/2023',
+    docdate: '19/05/2023',
     doctype: '1',
     secrets: '1',
     rapid: '1',
@@ -140,24 +140,25 @@ export class DocCreateComponent implements OnInit {
     const fontUrl = './../../../assets/fonts/ThaiFonts/THSarabun.ttf'; // Adjust the path to your font file
     // Load the font
 
-    
-  
     pdf.addFont(fontUrl, 'THSarabun', 'normal');
 
     // Set the font for the text
     pdf.setFont('THSarabun');
     pdf.setFontSize(29);
-    pdf.text('บันทึกข้อความ', 50, 20);
+    pdf.text('บันทึกข้อความ', 60, 20);
     pdf.setFontSize(16);
 
-    // pdf.text(this.docNew.comment, 10, 30);
+    pdf.text('ส่วนราชการ', 10, 30);
+    pdf.text('ที่', 10, 40);
+    pdf.text('เรื่อง', 10, 50);
+    pdf.text('เรียน', 10, 60);
 
     // pdf.text('This is a new line.\n', 10, 35); // Add a new line
     // pdf.text('This is another line.', 10, 40);
     // pdf.text('\n', 10, 45); // Add a new line
 
     var splitTitle = pdf.splitTextToSize(this.docNew.doc_content, 180);
-    pdf.text(splitTitle,10,50);
+    pdf.text(splitTitle,20,70);
 
     this.countWordsInLine();
 
@@ -283,6 +284,8 @@ export class DocCreateComponent implements OnInit {
       })
       .subscribe((res: any) => {
         console.log('resig Form: ', res);
+        this.generatePdfFile();
+        this.router.navigate(['/doc-ouside']);
        
       });
   }

@@ -109,10 +109,25 @@
             
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">รายละเอียดหนังสือ</label>
+                  <label for="example-text-input" class="form-control-label">ภาคเหตุ</label>
                   <!-- <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor> -->
-                  <textarea class="form-control" id="doc_content" [(ngModel)]="docNew.doc_content" formControlName="doc_content" [rows]="15"> 
+                  <textarea class="form-control" id="doc_content" [(ngModel)]="docNew.doc_content" formControlName="doc_content" [rows]="10"> 
                   </textarea>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">ภาคความประสงค์</label>
+                  <!-- <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor> -->
+                  <textarea class="form-control" id="doc_content" [rows]="6"> 
+                  </textarea>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">ภาคสรุป</label>
+                  <!-- <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor> -->
+                  <input class="form-control" type="text">
                 </div>
               </div>
 
@@ -156,8 +171,8 @@
                       </p>
                       <button class="btn btn-primary btn-sm ms-auto" type="submit" (click)="createNewDocument()">
                         <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> สร้างหนังสือ</button>
-                      <button class="btn btn-primary btn-sm ms-auto" type="submit" (click)="generatePdfFile()">
-                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> generatePDF</button>
+                      <!-- <button class="btn btn-primary btn-sm ms-auto" type="submit" (click)="generatePdfFile()">
+                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> generatePDF</button> -->
                     </div>
                   </div>
                   <!-- <div class="col-md-2">

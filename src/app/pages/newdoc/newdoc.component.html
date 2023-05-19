@@ -1,198 +1,127 @@
-
-<div class="row"> 
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-body p-3">
-          <div class="row">
-            <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-uppercase font-weight-bold"><a href="#" routerLink="/send-sign">หนังสือลงนาม</a></p>
-                
-                <!-- <p class="mb-0">
-                    รายการวันนี้
-                    <span class="text-success text-sm font-weight-bolder">+5</span>
-                  </p> -->
-              </div>
-            </div>
-            <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                <a href="#" routerLink="/send-report"><i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-body p-3">
-          <div class="row">
-            <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-uppercase font-weight-bold"><a href="#" routerLink="/send-report">รายงานหนังสือส่ง</a></p>
-                <h5 class="font-weight-bolder">
-                </h5>
-                
-              </div>
-            </div>
-            <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                <a href="#" routerLink="/send-report"><i class="ni ni-books text-lg opacity-10" aria-hidden="true"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  </div>
-  
-  <div class="row mt-4">
-      <div class="col-12">
-        
-        <div class="card mb-4">
-          <!-- <div class="card-header pb-0">
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card mb-4">
+      <!-- <div class="card-header pb-0">
             <h6>รายการหนังสือส่ง</h6>
           </div> -->
-          <div class="card-header pb-0">
-            <div class="d-flex align-items-right">
-              <p class="mb-0">รายการหนังสือส่ง</p>
-              <a href="#" routerLink="/form-new" class="btn btn-primary btn-sm ms-auto"><i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> สร้างหนังสือ</a>
+      <div class="card-header pb-0">
+        <div class="d-flex align-items-right">
+          <p class="mb-0">เลือกประเภทหนังสือ</p>
+          <!-- <a href="#" routerLink="/form-new" class="btn btn-primary btn-sm ms-auto"><i
+              class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> สร้างหนังสือ</a> -->
+        </div>
+      </div>
+      <div class="card-body px-0 pt-0 pb-2">
+        <div class="ag-format-container">
+          <div class="ag-courses_box">
+            <div class="ag-courses_item">
+              <a href="#" routerLink="/doc-outside" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+      
+                <div class="ag-courses-item_title">
+                  หนังสือภายนอก
+                </div>
+      
+                <!-- <div class="ag-courses-item_date-box">
+                  Start:
+                  <span class="ag-courses-item_date">
+                    04.11.2022
+                  </span>
+                </div> -->
+              </a>
             </div>
-          </div>
-          <div class="card-body px-0 pt-0 pb-2">
-            
+      
+            <div class="ag-courses_item">
+              <a href="#" routerLink="/doc-inside" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+      
+                <div class="ag-courses-item_title">
+                  หนังสือภายใน
+                </div>
+      
+                <!-- <div class="ag-courses-item_date-box">
+                  Start:
+                  <span class="ag-courses-item_date">
+                    04.11.2022
+                  </span>
+                </div> -->
+              </a>
+            </div>
+      
+            <div class="ag-courses_item">
+              <a href="#" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+      
+                <div class="ag-courses-item_title">
+                  หนังสือเวียน
+                </div>
+      
+                <!-- <div class="ag-courses-item_date-box">
+                  Start:
+                  <span class="ag-courses-item_date">
+                    04.11.2022
+                  </span>
+                </div> -->
+              </a>
+            </div>
+      
+            <div class="ag-courses_item">
+              <a href="#" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+      
+                <div class="ag-courses-item_title">
+                  หนังสือประทับตรา
+                </div>
+      
+                <!-- <div class="ag-courses-item_date-box">
+                  Start:
+                  <span class="ag-courses-item_date">
+                    04.11.2022
+                  </span>
+                </div> -->
+              </a>
+            </div>
+      
+            <div class="ag-courses_item">
+              <a href="#" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+      
+                <div class="ag-courses-item_title">
+                  ประกาศ
+                </div>
+      
+                <!-- <div class="ag-courses-item_date-box">
+                  Start:
+                  <span class="ag-courses-item_date">
+                    30.11.2022
+                  </span>
+                </div> -->
+              </a>
+            </div>
+      
+            <div class="ag-courses_item">
+              <a href="#" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+      
+                <div class="ag-courses-item_title">
+                  คำสั่ง
+                </div>
+              </a>
+            </div>
+      
+            <div class="ag-courses_item">
+              <a href="#" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg">
+                </div>
+                <div class="ag-courses-item_title">
+                  หนังสือรับรอง
+                </div>
+              </a>
+            </div>
+      
           </div>
         </div>
       </div>
     </div>
-
-    <div class="row mt-4">
-        <div class="ag-format-container">
-            <div class="ag-courses_box">
-              <div class="ag-courses_item">
-                <a href="#" class="ag-courses-item_link">
-                  <div class="ag-courses-item_bg"></div>
-          
-                  <div class="ag-courses-item_title">
-                    UI/Web&amp;Graph design for teenagers 11-17&#160;years old
-                  </div>
-          
-                  <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                      04.11.2022
-                    </span>
-                  </div>
-                </a>
-              </div>
-          
-              <div class="ag-courses_item">
-                <a href="#" class="ag-courses-item_link">
-                  <div class="ag-courses-item_bg"></div>
-          
-                  <div class="ag-courses-item_title">
-                    UX/UI Web-Design&#160;+ Mobile Design
-                  </div>
-          
-                  <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                      04.11.2022
-                    </span>
-                  </div>
-                </a>
-              </div>
-          
-              <div class="ag-courses_item">
-                <a href="#" class="ag-courses-item_link">
-                  <div class="ag-courses-item_bg"></div>
-          
-                  <div class="ag-courses-item_title">
-                    Annual package "Product+UX/UI+Graph designer&#160;2022"
-                  </div>
-          
-                  <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                      04.11.2022
-                    </span>
-                  </div>
-                </a>
-              </div>
-          
-              <div class="ag-courses_item">
-                <a href="#" class="ag-courses-item_link">
-                  <div class="ag-courses-item_bg"></div>
-          
-                  <div class="ag-courses-item_title">
-                    Graphic Design
-                  </div>
-          
-                  <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                      04.11.2022
-                    </span>
-                  </div>
-                </a>
-              </div>
-          
-              <div class="ag-courses_item">
-                <a href="#" class="ag-courses-item_link">
-                  <div class="ag-courses-item_bg"></div>
-          
-                  <div class="ag-courses-item_title">
-                    Motion Design
-                  </div>
-          
-                  <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                      30.11.2022
-                    </span>
-                  </div>
-                </a>
-              </div>
-          
-              <div class="ag-courses_item">
-                <a href="#" class="ag-courses-item_link">
-                  <div class="ag-courses-item_bg"></div>
-          
-                  <div class="ag-courses-item_title">
-                    Front-end development&#160;+ jQuery&#160;+ CMS
-                  </div>
-                </a>
-              </div>
-          
-              <div class="ag-courses_item">
-                <a href="#" class="ag-courses-item_link">
-                  <div class="ag-courses-item_bg">
-                  </div>
-                  <div class="ag-courses-item_title">
-                    Digital Marketing
-                  </div>
-                </a>
-              </div>
-          
-              <div class="ag-courses_item">
-                <a href="#" class="ag-courses-item_link">
-                  <div class="ag-courses-item_bg"></div>
-          
-                  <div class="ag-courses-item_title">
-                    Interior Design
-                  </div>
-          
-                  <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                      31.10.2022
-                    </span>
-                  </div>
-                </a>
-              </div>
-          
-            </div>
-          </div>
-    </div>
-  
+  </div>
+</div>
