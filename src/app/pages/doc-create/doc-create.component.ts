@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 declare var require: any;
 
 import {PDFDocument, PDFForm, StandardFonts, PDFFont, rgb} from 'pdf-lib';
@@ -60,6 +62,7 @@ export class DocCreateComponent implements OnInit {
     private router: Router,
     private elementRef: ElementRef,
     private httpClient: HttpClient,
+    private sanitizer: DomSanitizer
   ) {
     //get user profile
     const token: any = this.dataService.getToken();
@@ -102,6 +105,10 @@ export class DocCreateComponent implements OnInit {
 
   ngOnInit(): void {
       
+  }
+
+  sanitizeHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   public openPDF(): void {

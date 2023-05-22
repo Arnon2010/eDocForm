@@ -6,7 +6,7 @@
             <p class="mb-0">
               <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> 
               สร้างหนังสือ</p>
-            <button class="btn btn-primary btn-sm ms-auto">Template</button>
+            <!-- <button class="btn btn-primary btn-sm ms-auto">Template</button> -->
           </div>
         </div>
         <div class="card-body" id="pdfTable" #pdfTable="">
@@ -106,11 +106,19 @@
                   <input class="form-control" type="text" [(ngModel)]="docNew.headline" formControlName="headline">
                 </div>
               </div>
-            
               <div class="col-md-12">
                 <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">รายละเอียดหนังสือ</label>
+                  <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div [innerHTML]="sanitizeHtml(docNew.doc_content)"></div>
+              </div>
+
+              <!-- <div class="col-md-12">
+                <div class="form-group">
                   <label for="example-text-input" class="form-control-label">ภาคเหตุ</label>
-                  <!-- <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor> -->
                   <textarea class="form-control" id="doc_content" [(ngModel)]="docNew.doc_content" formControlName="doc_content" [rows]="10"> 
                   </textarea>
                 </div>
@@ -118,7 +126,6 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">ภาคความประสงค์</label>
-                  <!-- <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor> -->
                   <textarea class="form-control" id="doc_content" [rows]="6"> 
                   </textarea>
                 </div>
@@ -126,13 +133,11 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">ภาคสรุป</label>
-                  <!-- <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor> -->
                   <input class="form-control" type="text">
                 </div>
-              </div>
+              </div> -->
 
               <div class="col-md-12">
-              
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">การปฏิบัติ</label>
                   <textarea class="form-control" cols="180" [rows]="2" id="Comment" [(ngModel)]="docNew.comment" formControlName="comment" [rows]="3"></textarea>

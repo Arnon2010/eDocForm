@@ -16,6 +16,7 @@ declare var require: any;
 // import the pdfmake library
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
 // window.pdfMake = require('pdfmake/build/pdfmake.min');
@@ -25,37 +26,25 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 // import { defaultStyle, styles } from './../../config/customStyle';
 // import { fonts } from './../../config/pdfFonts';
 
-// PDFMAKE fonts
-(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
-// (pdfMake as any).fonts = fonts;
-
-(pdfMake as any).fonts = {
-  CustomFont: {
-    normal: 'THSarabun.ttf',
-    bold: 'THSarabun Bold.ttf',
-    italics: 'THSarabun Italic.ttf',
-    bolditalics: 'THSarabun Bold Italic.ttf'
-  }
-}
 
 const htmlToPdfmake = require("html-to-pdfmake");
 
 // (pdfMake as any).fonts = {
-    //   // Default font should still be available
-    //   THSarabunNew: {
-    //     normal: 'THSarabunNew.ttf',
-    //     bold: 'THSarabunNew Bold.ttf',
-    //     italics: 'THSarabunNew Italic.ttf',
-    //     bolditalics: 'THSarabunNew BoldItalic.ttf'
-    //   },
-    //   THSarabun: {
-    //       normal: 'THSarabun.ttf',
-    //       bold: 'THSarabun Bold.ttf',
-    //       italics: 'THSarabun Italic.ttf',
-    //       bolditalics: 'THSarabun Bold Italic.ttf'
-    //   }
-    // };
+//       // Default font should still be available
+//       THSarabunNew: {
+//         normal: 'THSarabunNew.ttf',
+//         bold: 'THSarabunNew Bold.ttf',
+//         italics: 'THSarabunNew Italic.ttf',
+//         bolditalics: 'THSarabunNew BoldItalic.ttf'
+//       },
+//       THSarabun: {
+//           normal: 'THSarabun.ttf',
+//           bold: 'THSarabun Bold.ttf',
+//           italics: 'THSarabun Italic.ttf',
+//           bolditalics: 'THSarabun Bold Italic.ttf'
+//       }
+//     };
 
 
 
@@ -298,6 +287,46 @@ export class FormNewComponent implements OnInit {
     };
 
 
+    printPDF(){
+      var pdfMake = require('pdfmake/build/pdfmake.js');
+      var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+      pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    
+      pdfMake.fonts = {
+        THSarabunNew: {
+          normal: 'THSarabunNew.ttf',
+          bold: 'THSarabunNew-Bold.ttf',
+          italics: 'THSarabunNew-Italic.ttf',
+          bolditalics: 'THSarabunNew-BoldItalic.ttf'
+        },
+        THSarabun: {
+          normal: 'THSarabun.ttf',
+          bold: 'THSarabun-Bold.ttf',
+          italics: 'THSarabun-Italic.ttf',
+          bolditalics: 'THSarabun-BoldItalic.ttf'
+        },
+        Roboto: {
+          normal: 'Roboto-Regular.ttf',
+          bold: 'Roboto-Medium.ttf',
+          italics: 'Roboto-Italic.ttf',
+          bolditalics: 'Roboto-MediumItalic.ttf'
+        }
+      }
+
+      var html = htmlToPdfmake(this.docNew.doc_content);
+    
+      var docDefinition = {
+        pageSize: 'A4', // Set the page size to A4
+        content: [
+          { text: 'บันทึกข้อความ', fontSize: 29,
+            absolutePosition: { x: 100, y: 100 }, 
+          },
+          html,
+        ],defaultStyle: {font: 'THSarabun', fontSize:'29'}
+      };
+      pdfMake.createPdf(docDefinition).open()
+    
+    }
   
   //test pdfmake
   exportPDF2() {
