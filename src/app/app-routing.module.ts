@@ -15,7 +15,7 @@ import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'form-new',
+    redirectTo: 'doc-create',
     pathMatch: 'full',
   },
   {path: 'home', component: HomeComponent},

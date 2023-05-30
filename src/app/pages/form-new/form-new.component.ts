@@ -14,8 +14,10 @@ declare var require: any;
 //import * as variable from 'vfsFonts';
 
 // import the pdfmake library
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+// import * as pdfMake from 'pdfmake/build/pdfmake';
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+// (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
@@ -45,9 +47,6 @@ const htmlToPdfmake = require("html-to-pdfmake");
 //           bolditalics: 'THSarabun Bold Italic.ttf'
 //       }
 //     };
-
-
-
 
 @Component({
   selector: 'app-form-new',
@@ -83,6 +82,7 @@ export class FormNewComponent implements OnInit {
     senderdepart: '',
     destroy_year: '1',
   }
+
   title: string | undefined;
   pdfContent: {
     content: {
@@ -157,8 +157,6 @@ export class FormNewComponent implements OnInit {
 
     //(window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-    
-  
   }
 
   ngOnInit(): void {
@@ -288,8 +286,9 @@ export class FormNewComponent implements OnInit {
 
 
     printPDF(){
-      var pdfMake = require('pdfmake/build/pdfmake.js');
+      var pdfMake = require('pdfmake/build/pdfmake.min.js');
       var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+      
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
     
       pdfMake.fonts = {
@@ -299,12 +298,6 @@ export class FormNewComponent implements OnInit {
           italics: 'THSarabunNew-Italic.ttf',
           bolditalics: 'THSarabunNew-BoldItalic.ttf'
         },
-        THSarabun: {
-          normal: 'THSarabun.ttf',
-          bold: 'THSarabun-Bold.ttf',
-          italics: 'THSarabun-Italic.ttf',
-          bolditalics: 'THSarabun-BoldItalic.ttf'
-        },
         Roboto: {
           normal: 'Roboto-Regular.ttf',
           bold: 'Roboto-Medium.ttf',
@@ -313,7 +306,7 @@ export class FormNewComponent implements OnInit {
         }
       }
 
-      var html = htmlToPdfmake(this.docNew.doc_content);
+      var doc_content = htmlToPdfmake(this.docNew.doc_content);
     
       var docDefinition = {
         pageSize: 'A4', // Set the page size to A4
@@ -321,51 +314,15 @@ export class FormNewComponent implements OnInit {
           { text: 'บันทึกข้อความ', fontSize: 29,
             absolutePosition: { x: 100, y: 100 }, 
           },
-          html,
-        ],defaultStyle: {font: 'THSarabun', fontSize:'29'}
+          doc_content,
+        ],defaultStyle: {
+            font: 'THSarabunNew'
+          }
       };
       pdfMake.createPdf(docDefinition).open()
     
     }
   
-  //test pdfmake
-  exportPDF2() {
-
-    //const plaintext = this.docNew.doc_content.replace(/(<([^>]+)>)/ig, "");
-    console.log('doc content: ', this.docNew);
-    this.title = 'ngx-pdfmake-example';
-    this.pdfContent = {
-    
-      content: [
-        {
-          // layout: 'lightHorizontalLines', // optional
-          // table: {
-          //   // headers are automatically repeated if the table spans over multiple pages
-          //   // you can declare how many rows should be treated as headers
-          //   headerRows: 1,
-          //   widths: ['*', 'auto', 100, '*'],
-
-          //   body: [
-          //     ['', 'ทดสอบระบบ', 'Third', 'The last one'],
-          //     ['Value 1', 'Value 2', 'Value 3', 'Value 4'],
-          //     [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4']
-          //   ]
-          // }
-          text: "ทดสอบระบบสารบรรณ",
-          font: "CustomFont",
-          
-        }
-
-      ]
-      
-
-    };
-    let pdf = pdfMake.createPdf(this.pdfContent);
-    //let pdf = pdfMake.createPdf(this.pdfContent, pdfMake.tableLayouts, fonts, vfs);
-    pdf.download();
-
-  }
-
   public exportPDF() {
     const pdfTable = this.pdfTable.nativeElement;
     //var html = htmlToPdfmake(pdfTable.innerHTML);
@@ -377,7 +334,7 @@ export class FormNewComponent implements OnInit {
       }
     };
 
-    pdfMake.createPdf(documentDefinition).download();
+    //pdfMake.createPdf(documentDefinition).download();
   }
 
 }

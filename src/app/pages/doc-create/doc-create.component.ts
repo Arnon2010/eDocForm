@@ -133,57 +133,7 @@ export class DocCreateComponent implements OnInit {
               [5, 'Angel', 'Angel@yahoo.com', 'Marketing'],
               [6, 'อานนท์', 'arnn.l@rmutsv.ac.th', 'โปรแกรมเมอร์']]
 
-  generatePdfFile() {
-    var pdf = new jsPDF("p", "mm", "a4");
 
-    var doc_content = htmlToPdfmake(this.docNew.doc_content);
-    const lines = this.docNew.comment.split('\n'); //count line
-    const lineCount = lines.length;
-    console.log('doc_content :', doc_content);
-
-    //const editorText = this.textEditor.nativeElement.innerText;
-
-    //console.log('doc_content: ',doc_content[0].text);
-    const fontUrl = './../../../assets/fonts/ThaiFonts/THSarabun.ttf'; // Adjust the path to your font file
-    // Load the font
-
-    pdf.addFont(fontUrl, 'THSarabun', 'normal');
-
-    // Set the font for the text
-    pdf.setFont('THSarabun');
-    pdf.setFontSize(29);
-    pdf.text('บันทึกข้อความ', 60, 20);
-    pdf.setFontSize(16);
-
-    pdf.text('ส่วนราชการ', 10, 30);
-    pdf.text('ที่', 10, 40);
-    pdf.text('เรื่อง', 10, 50);
-    pdf.text('เรียน', 10, 60);
-
-    // pdf.text('This is a new line.\n', 10, 35); // Add a new line
-    // pdf.text('This is another line.', 10, 40);
-    // pdf.text('\n', 10, 45); // Add a new line
-
-    var splitTitle = pdf.splitTextToSize(this.docNew.doc_content, 180);
-    pdf.text(splitTitle,20,70);
-
-    this.countWordsInLine();
-
-    // (pdf as any).autoTable({
-    //   head: this.header,
-    //   body: this.tableData,
-    //   theme: 'plain',
-    //   didDrawCell: (data: {column: {index: any;};}) =>{
-    //     console.log(data.column.index);
-    //   }
-    // });
-
-    // Open PDF document in browser's new tab
-    pdf.output('dataurlnewwindow');
-
-    // Download PDF doc
-    pdf.save('table.pdf');
-  }
 
 
   async createPdf() {
@@ -291,14 +241,77 @@ export class DocCreateComponent implements OnInit {
       })
       .subscribe((res: any) => {
         console.log('resig Form: ', res);
-        this.generatePdfFile();
+        //this.generatePdfFile();
+        this.createPDF();
         this.router.navigate(['/doc-ouside']);
        
       });
   }
 
-  exportPDF2(){
+  createPDF() {
+    //console.log('create new document: ', this.docNew);
+    this.httpClient
+      .post<createDocForm>(environment.baseUrl + '/send/_create_pdf_document.php', this.docNew, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .subscribe((res: any) => {
+        console.log('resig Form: ', res);
+        //this.generatePdfFile();
+        
+        this.router.navigate(['/doc-ouside']);
+       
+      });
+  }
 
+  generatePdfFile() {
+    var pdf = new jsPDF("p", "mm", "a4");
+
+    var doc_content = htmlToPdfmake(this.docNew.doc_content);
+    const lines = this.docNew.comment.split('\n'); //count line
+    const lineCount = lines.length;
+    console.log('doc_content :', doc_content);
+
+    //const editorText = this.textEditor.nativeElement.innerText;
+    //console.log('doc_content: ',doc_content[0].text);
+    const fontUrl = './../../../assets/fonts/ThaiFonts/THSarabun.ttf'; // Adjust the path to your font file
+    // Load the font
+
+    pdf.addFont(fontUrl, 'THSarabun', 'normal');
+    // Set the font for the text
+    pdf.setFont('THSarabun');
+    pdf.setFontSize(29);
+    pdf.text('บันทึกข้อความ', 60, 20);
+    pdf.setFontSize(16);
+
+    pdf.text('ส่วนราชการ', 10, 30);
+    pdf.text('ที่', 10, 40);
+    pdf.text('เรื่อง', 10, 50);
+    pdf.text('เรียน', 10, 60);
+
+    // pdf.text('This is a new line.\n', 10, 35); // Add a new line
+    // pdf.text('This is another line.', 10, 40);
+    // pdf.text('\n', 10, 45); // Add a new line
+
+    var splitTitle = pdf.splitTextToSize(this.docNew.doc_content, 180);
+    pdf.text(splitTitle,20,70);
+
+    this.countWordsInLine();
+
+    // (pdf as any).autoTable({
+    //   head: this.header,
+    //   body: this.tableData,
+    //   theme: 'plain',
+    //   didDrawCell: (data: {column: {index: any;};}) =>{
+    //     console.log(data.column.index);
+    //   }
+    // });
+
+    // Open PDF document in browser's new tab
+    pdf.output('dataurlnewwindow');
+    // Download PDF doc
+    pdf.save('table.pdf');
   }
 
 }
