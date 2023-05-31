@@ -51,6 +51,8 @@ export class DocCreateComponent implements OnInit {
     headline: '',
     receiver: '',
     doc_content: '',
+    doc_content_wish: '',
+    doc_content_conc: '',
     sender: '',
     senderdepart: '',
     destroy_year: '1',
@@ -90,6 +92,8 @@ export class DocCreateComponent implements OnInit {
       receiver: ['', Validators.required],
       headline: ['', Validators.required],
       doc_content: ['', Validators.required],
+      doc_content_wish: ['', Validators.required],
+      doc_content_conc: ['', Validators.required],
       comment: ['', Validators.required],
       //sender: ['', Validators.required],
       destroy_year: ['1', Validators.required]
@@ -101,6 +105,9 @@ export class DocCreateComponent implements OnInit {
 
     // หน่วยงานส่วนราชการ
     this.deptGovernment(departId, univId, userType);
+
+    
+    this.testStd();
   }
 
   ngOnInit(): void {
@@ -132,9 +139,6 @@ export class DocCreateComponent implements OnInit {
               [4, 'abdul', 'abdul@yahoo.com', 'Finance'],
               [5, 'Angel', 'Angel@yahoo.com', 'Marketing'],
               [6, 'อานนท์', 'arnn.l@rmutsv.ac.th', 'โปรแกรมเมอร์']]
-
-
-
 
   async createPdf() {
     const pdfDoc = await PDFDocument.create()
@@ -314,6 +318,22 @@ export class DocCreateComponent implements OnInit {
     pdf.save('table.pdf');
   }
 
+//
+testStd() {
+ 
+    this.httpClient
+      .post<createDocForm>('https://sis.rmutsv.ac.th/sis/api/pdo_mysql_std_dev.php', {"opt":"readone","g_student":"163401040079"}, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .subscribe((res: any) => {
+        console.log('resig student: ', res);
+        
+       
+      });
+}
+
 }
 
 
@@ -329,6 +349,8 @@ export interface createDocForm {
   headline: String;
   receiver: String;
   doc_content: any;
+  doc_content_wish: any;
+  doc_content_conc: any;
   sender: String;
   senderdepart: String;
   destroy_year: String;
@@ -346,6 +368,8 @@ export interface updateDocForm {
   headline: String;
   receiver: String;
   doc_content: any;
+  doc_content_wish: any;
+  doc_content_conc: any;
   sender: String;
   senderdepart: String;
   destroy_year: String;

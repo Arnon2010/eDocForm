@@ -106,36 +106,38 @@
                   <input class="form-control" type="text" [(ngModel)]="docNew.headline" formControlName="headline">
                 </div>
               </div>
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">รายละเอียดหนังสือ</label>
                   <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor>
                 </div>
               </div>
               <div class="col-md-12">
+                <div>{{docNew.doc_content}}</div>
                 <div [innerHTML]="sanitizeHtml(docNew.doc_content)"></div>
-              </div>
+              </div> -->
 
-              <!-- <div class="col-md-12">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">ภาคเหตุ</label>
-                  <textarea class="form-control" id="doc_content" [(ngModel)]="docNew.doc_content" formControlName="doc_content" [rows]="10"> 
+                  <textarea class="form-control" [(ngModel)]="docNew.doc_content" formControlName="doc_content" [rows]="6"> 
                   </textarea>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">ภาคความประสงค์</label>
-                  <textarea class="form-control" id="doc_content" [rows]="6"> 
+                  <textarea class="form-control" [(ngModel)]="docNew.doc_content_wish" formControlName="doc_content_wish" [rows]="4"> 
                   </textarea>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">ภาคสรุป</label>
-                  <input class="form-control" type="text">
+                  <textarea class="form-control" [(ngModel)]="docNew.doc_content_conc" formControlName="doc_content_conc" [rows]="2"> 
+                  </textarea>
                 </div>
-              </div> -->
+              </div>
 
               <div class="col-md-12">
                 <div class="form-group">
@@ -176,8 +178,8 @@
                       </p>
                       <button class="btn btn-primary btn-sm ms-auto" type="submit" (click)="createNewDocument()">
                         <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> สร้างหนังสือ</button>
-                      <button class="btn btn-primary btn-sm ms-auto" type="submit" (click)="generatePdfFile()">
-                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> generatePDF</button>
+                      <!-- <button class="btn btn-primary btn-sm ms-auto" type="submit" (click)="generatePdfFile()">
+                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> generatePDF</button> -->
                     </div>
                   </div>
                   <!-- <div class="col-md-2">

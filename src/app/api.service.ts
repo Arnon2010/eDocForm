@@ -89,7 +89,20 @@ export class ApiService {
     + '&univ=' + univ_id + '&usertype=' + user_type;
     return this.httpClient.get(api, { headers: this.headers })
     .pipe(map((res:any) => {
-        console.log('doc type from api: ',res.data);
+        //console.log('doc type from api: ',res.data);
+        return res.data || [];
+    }),
+    catchError(this.handleError)
+    );
+  }
+
+  //test student
+
+  public apiStd() {
+    let api = 'https://sis.rmutsv.ac.th/sis/api/pdo_mysql_std_dev.php?opt=readone&g_student=163401040079' ;
+    return this.httpClient.get(api, { headers: this.headers })
+    .pipe(map((res:any) => {
+        console.log('student api: ',res.data);
         return res.data || [];
     }),
     catchError(this.handleError)
