@@ -96,8 +96,31 @@ export class ApiService {
     );
   }
 
-  //test student
+  // ผู้ลงนาม
+  public apiTakePosition(depart_id:any) {
+    let api = environment.baseUrl + '/system/_take_list.php?depart_id=' + depart_id;
+    return this.httpClient.get(api, { headers: this.headers })
+    .pipe(map((res:any) => {
+        //console.log('doc type from api: ',res.data);
+        return res.data || [];
+    }),
+    catchError(this.handleError)
+    );
+  }
 
+  // ตำแหน่งผู้ลงนาม
+  public apiPosition(tposition_id:any, depart_id:any) {
+    let api = environment.baseUrl + '/system/_take_position_list.php?tposition_id=' + tposition_id + '&depart_id=' + depart_id;
+    return this.httpClient.get(api, { headers: this.headers })
+    .pipe(map((res:any) => {
+        //console.log('doc type from api: ',res.data);
+        return res.data || [];
+    }),
+    catchError(this.handleError)
+    );
+  }
+
+  //test student
   public apiStd() {
     let api = 'https://sis.rmutsv.ac.th/sis/api/pdo_mysql_std_dev.php?opt=readone&g_student=163401040079' ;
     return this.httpClient.get(api, { headers: this.headers })

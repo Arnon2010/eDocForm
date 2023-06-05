@@ -12,13 +12,13 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 declare var require: any;
 
-import {PDFDocument, PDFForm, StandardFonts, PDFFont, rgb} from 'pdf-lib';
+import { PDFDocument, PDFForm, StandardFonts, PDFFont, rgb } from 'pdf-lib';
 const fontkit = require("@pdf-lib/fontkit");
 const htmlToPdfmake = require("html-to-pdfmake");
 //const fs = require('file-system');
 //const fs = require("fs");
 
-import {jsPDF} from "jspdf";
+import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 
 import html2canvas from 'html2canvas';
@@ -38,6 +38,10 @@ export class DocCreateComponent implements OnInit {
   // rapid:boolean = true;
   doctype_list: any = [];
   deptgovernment_list: any = [];
+  takeposition_list: any = [];
+  position_list: any = [];
+
+  isChecked: boolean = false; // Set the initial state of the checkbox
 
   docNew: createDocForm = {
     userid: 0,
@@ -53,6 +57,7 @@ export class DocCreateComponent implements OnInit {
     doc_content: '',
     doc_content_wish: '',
     doc_content_conc: '',
+    tposition_id: '',
     sender: '',
     senderdepart: '',
     destroy_year: '1',
@@ -95,6 +100,7 @@ export class DocCreateComponent implements OnInit {
       doc_content_wish: ['', Validators.required],
       doc_content_conc: ['', Validators.required],
       comment: ['', Validators.required],
+      tposition_id: ['', Validators.required],
       //sender: ['', Validators.required],
       destroy_year: ['1', Validators.required]
 
@@ -106,12 +112,15 @@ export class DocCreateComponent implements OnInit {
     // หน่วยงานส่วนราชการ
     this.deptGovernment(departId, univId, userType);
 
-    
+    // ผู้ลงนาม
+    this.takePosition(departId);
+
+
     this.testStd();
   }
 
   ngOnInit(): void {
-      
+
   }
 
   sanitizeHtml(html: string): SafeHtml {
@@ -132,18 +141,18 @@ export class DocCreateComponent implements OnInit {
   }
 
 
-  header = [['ID','Name','Email','Profile']]
-  tableData = [[1,'Bhuban', 'Bhuban@gmail.com', 'Developer'],
-              [2, 'rinkesh', 'rinkesh@yahoo.com', 'Sales'],
-              [3, 'arpit', 'arpit@yahoo.com', 'Sales'],
-              [4, 'abdul', 'abdul@yahoo.com', 'Finance'],
-              [5, 'Angel', 'Angel@yahoo.com', 'Marketing'],
-              [6, 'อานนท์', 'arnn.l@rmutsv.ac.th', 'โปรแกรมเมอร์']]
+  header = [['ID', 'Name', 'Email', 'Profile']]
+  tableData = [[1, 'Bhuban', 'Bhuban@gmail.com', 'Developer'],
+  [2, 'rinkesh', 'rinkesh@yahoo.com', 'Sales'],
+  [3, 'arpit', 'arpit@yahoo.com', 'Sales'],
+  [4, 'abdul', 'abdul@yahoo.com', 'Finance'],
+  [5, 'Angel', 'Angel@yahoo.com', 'Marketing'],
+  [6, 'อานนท์', 'arnn.l@rmutsv.ac.th', 'โปรแกรมเมอร์']]
 
   async createPdf() {
     const pdfDoc = await PDFDocument.create()
     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
-  
+
     const page = pdfDoc.addPage()
     const { width, height } = page.getSize()
     const fontSize = 16
@@ -154,13 +163,13 @@ export class DocCreateComponent implements OnInit {
       font: timesRomanFont,
       color: rgb(0, 0.53, 0.71),
     })
-  
+
     const pdfBytes = await pdfDoc.save();
     this.saveByteArray('test.pdf', pdfBytes);
   }
 
-  saveByteArray(reportName:any, byte:any) {
-    var blob = new Blob([byte], {type: "application/pdf"});
+  saveByteArray(reportName: any, byte: any) {
+    var blob = new Blob([byte], { type: "application/pdf" });
     var link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     var fileName = reportName;
@@ -203,7 +212,7 @@ export class DocCreateComponent implements OnInit {
   countWordsInLine() {
     const lines = this.docNew.comment.split('\n');
     const lineCount = lines.length;
-    
+
     for (let i = 0; i < lineCount; i++) {
       const words = lines[i].trim().split(' ');
       const wordCount = words.length;
@@ -231,6 +240,27 @@ export class DocCreateComponent implements OnInit {
       })
   }
 
+  // ผู้ลงนาม และตำแหน่ง
+  takePosition(departid: any) {
+    //default depart_id
+    this.dataService.apiTakePosition(departid)
+      .subscribe((res: any) => {
+        this.takeposition_list = res;
+        console.log('takeposition_list: ', res);
+      })
+  }
+
+  // ตำแหน่ง
+  Position(tposition_id: any, depart_id: any) {
+    //default depart_id
+    this.dataService.apiPosition(tposition_id, depart_id)
+      .subscribe((res: any) => {
+        this.position_list = res;
+        console.log('position_list: ', res);
+      })
+  }
+
+
   createNewDocument1(angFormNew: any) {
     console.log('create new form: ', angFormNew);
   }
@@ -248,7 +278,7 @@ export class DocCreateComponent implements OnInit {
         //this.generatePdfFile();
         this.createPDF();
         this.router.navigate(['/doc-ouside']);
-       
+
       });
   }
 
@@ -263,9 +293,9 @@ export class DocCreateComponent implements OnInit {
       .subscribe((res: any) => {
         console.log('resig Form: ', res);
         //this.generatePdfFile();
-        
+
         this.router.navigate(['/doc-ouside']);
-       
+
       });
   }
 
@@ -299,7 +329,7 @@ export class DocCreateComponent implements OnInit {
     // pdf.text('\n', 10, 45); // Add a new line
 
     var splitTitle = pdf.splitTextToSize(this.docNew.doc_content, 180);
-    pdf.text(splitTitle,20,70);
+    pdf.text(splitTitle, 20, 70);
 
     this.countWordsInLine();
 
@@ -318,24 +348,23 @@ export class DocCreateComponent implements OnInit {
     pdf.save('table.pdf');
   }
 
-//
-testStd() {
- 
+  //
+  testStd() {
+
     this.httpClient
-      .post<createDocForm>('https://sis.rmutsv.ac.th/sis/api/pdo_mysql_std_dev.php', {"opt":"readone","g_student":"163401040079"}, {
+      .post<createDocForm>('https://sis.rmutsv.ac.th/sis/api/pdo_mysql_std_dev.php', { "opt": "readone", "g_student": "163401040079" }, {
         headers: {
           'Content-Type': 'application/json',
         },
       })
       .subscribe((res: any) => {
         console.log('resig student: ', res);
-        
-       
+
+
       });
-}
+  }
 
 }
-
 
 export interface createDocForm {
   userid: Number;
@@ -351,6 +380,7 @@ export interface createDocForm {
   doc_content: any;
   doc_content_wish: any;
   doc_content_conc: any;
+  tposition_id: any;
   sender: String;
   senderdepart: String;
   destroy_year: String;
@@ -370,6 +400,7 @@ export interface updateDocForm {
   doc_content: any;
   doc_content_wish: any;
   doc_content_conc: any;
+  tposition_id: any;
   sender: String;
   senderdepart: String;
   destroy_year: String;

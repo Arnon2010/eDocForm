@@ -94,18 +94,23 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-8">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">เรียน</label>
-                  <input class="form-control" type="text" [(ngModel)]="docNew.receiver" formControlName="receiver">
-                </div>
-              </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">เรื่อง</label>
                   <input class="form-control" type="text" [(ngModel)]="docNew.headline" formControlName="headline">
                 </div>
               </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">เรียน</label>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="isChecked">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">เสนอมากว่า 1 ฉบับ</label>
+                  </div> 
+                  <input class="form-control" type="text" [(ngModel)]="docNew.receiver" formControlName="receiver">
+                </div>
+              </div>
+              
               <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label for="example-text-input" class="form-control-label">รายละเอียดหนังสือ</label>
@@ -165,6 +170,29 @@
                   </div>
                 </div>
               </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">ผู้ลงนาม /ตำแหน่ง</label>
+                    <select class="form-select" [(ngModel)]="docNew.tposition_id" (ngModelChange)="Position($event, '26')" formControlName="tposition_id" aria-label="Default select example">
+                      <option *ngFor="let item of takeposition_list" value="{{item.Id}}">{{item.Name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">ตำแหน่ง</label>
+                    <select class="form-select" [(ngModel)]="docNew.position_id" formControlName="position_id" aria-label="Default select example">
+                      <option *ngFor="let item of position_list" value="{{item.Id}}">{{item.Name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div> -->
+
             </div>
             <hr class="horizontal dark">
             <p class="text-uppercase text-sm"></p>
