@@ -41,7 +41,7 @@ export class DocCreateComponent implements OnInit {
   takeposition_list: any = [];
   position_list: any = [];
 
-  isChecked: boolean = false; // Set the initial state of the checkbox
+  isChecked: boolean = true; // Set the initial state of the checkbox
 
   docNew: createDocForm = {
     userid: 0,
@@ -258,6 +258,11 @@ export class DocCreateComponent implements OnInit {
         this.position_list = res;
         console.log('position_list: ', res);
       })
+  }
+
+  // เพิ่มเรียนหน่วยงานที่เกี่ยวข้อง
+  addReceiver() {
+    
   }
 
 
