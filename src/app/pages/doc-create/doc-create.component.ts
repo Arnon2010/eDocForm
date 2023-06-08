@@ -1,6 +1,5 @@
-import { fonts } from './../../config/pdfFonts';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../api.service';
 import Swal from 'sweetalert2';
@@ -9,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 
 declare var require: any;
 
@@ -34,6 +34,7 @@ export class DocCreateComponent implements OnInit {
   @ViewChild('textEditor') textEditor!: ElementRef;
 
   creatForm: FormGroup;
+  skillsForm: FormGroup;
   // secrets:boolean = true;
   // rapid:boolean = true;
   doctype_list: any = [];
@@ -62,6 +63,11 @@ export class DocCreateComponent implements OnInit {
     senderdepart: '',
     destroy_year: '1',
   }
+  myForm: any;
+
+  form = this.fb.group({
+    lessons: this.fb.array([])
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -94,17 +100,22 @@ export class DocCreateComponent implements OnInit {
       rapid: ['1', Validators.required],
       doctype: ['1', Validators.required],
       depart_government_id: [departId, Validators.required],
-      receiver: ['', Validators.required],
+      receivers: this.fb.array([]),
       headline: ['', Validators.required],
       doc_content: ['', Validators.required],
-      doc_content_wish: ['', Validators.required],
+      content_wishs: this.fb.array([]),
       doc_content_conc: ['', Validators.required],
       comment: ['', Validators.required],
       tposition_id: ['', Validators.required],
       //sender: ['', Validators.required],
-      destroy_year: ['1', Validators.required]
-
+      destroy_year: ['1', Validators.required],
     });
+
+    this.skillsForm = this.fb.group({
+      name: '',
+      skills: this.fb.array([]) ,
+    });
+
 
     //ประเภทหนังสือ
     this.docTypeList();
@@ -123,8 +134,55 @@ export class DocCreateComponent implements OnInit {
 
   }
 
+
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  /** form ctrl receiver (เรียน) */
+  get receivers() : FormArray {
+    return this.creatForm.get("receivers") as FormArray
+  }
+
+  // new form
+  newReceiver(): FormGroup {
+    return this.fb.group({
+      receiver: ['', Validators.required],
+     
+    })
+  }
+
+  // เพิ่ม form ctrl receiver
+  addReceiver() {
+    const receiverForm = this.fb.group({
+      receiver: ['', Validators.required],
+     
+    })
+    this.receivers.push(receiverForm);
+  }
+ 
+  // ลบ form ctrl receiver
+  removeReceiver(i:number) {
+    this.receivers.removeAt(i);
+  }
+
+  /** Form ctrl content_wish (ภาคความประสงค์) */
+
+  get content_wishs() : FormArray{
+    return this.creatForm.get('content_wishs') as FormArray
+  }
+
+  // เพิ่ม
+  addContentWish() {
+    const contentWishForm = this.fb.group({
+      content_wish: ['', Validators.required],
+    })
+    this.content_wishs.push(contentWishForm);
+  }
+
+  // ลบ
+  removeContentWish(i:number) {
+    this.content_wishs.removeAt(i);
   }
 
   public openPDF(): void {
@@ -260,10 +318,7 @@ export class DocCreateComponent implements OnInit {
       })
   }
 
-  // เพิ่มเรียนหน่วยงานที่เกี่ยวข้อง
-  addReceiver() {
-    
-  }
+  //doc
 
 
   createNewDocument1(angFormNew: any) {

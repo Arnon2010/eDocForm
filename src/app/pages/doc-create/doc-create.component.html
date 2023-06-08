@@ -98,23 +98,21 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-10">
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">เรื่อง</label>
                 <input class="form-control" type="text" [(ngModel)]="docNew.headline" formControlName="headline">
               </div>
             </div>
             <div class="col-md-12">
-              <div class="form-group">
+              <div class="form-group" formArrayName="receivers">
                 <label for="example-text-input" class="form-control-label">เรียน</label>
-                <div class="form-check form-switch">
+                <!-- <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" [checked]="isChecked">
                   <label class="form-check-label" for="flexSwitchCheckDefault">เสนอมากว่า 1 ฉบับ</label>
-                </div>
-                <div *ngIf="!isChecked">
-                  <input class="form-control" type="text" [(ngModel)]="docNew.receiver" formControlName="receiver">
-                </div>
-                <div class="form-group row" *ngIf="isChecked">
+                </div> -->
+
+                <!-- <div class="form-group row" *ngIf="isChecked">
                   <div class="col-md-4">
                     <input class="form-control" type="text" [(ngModel)]="docNew.receiver" formControlName="receiver"
                       placeholder="ข้อความ">
@@ -129,8 +127,34 @@
                   <div class="col-md-2">
                     <button class="btn btn-primary btn-sm" (click)="addReceiver()">เพิ่ม</button>
                   </div>
+                </div> -->
+                <div *ngFor="let receiver of receivers.controls; let i=index">
+                  <div class="form-group row" [formGroupName]="i">
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" formControlName="receiver" placeholder="ข้อความ">
+                    </div>
+                    <div class="col-md-2">
+                      <button class="btn btn-secondary btn-sm" (click)="removeReceiver(i)">ลบ</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+
+                  <div class="col-md-4">
+                    <button class="btn btn-primary btn-sm" (click)="addReceiver()">เพิ่ม</button>
+                  </div>
                 </div>
               </div>
+
+              <!-- <div formArrayName="myArray">
+                <div *ngFor="let control of myForm.get('myArray').controls; let i = index">
+                  <input [formControlName]="i" placeholder="Value {{i + 1}}">
+                  <button (click)="removeControl(i)">Remove</button>
+                </div>
+              </div>
+              <button (click)="addControl()">Add Control</button> -->
+
             </div>
 
             <!-- <div class="col-md-12">
@@ -153,11 +177,26 @@
               </div>
             </div>
             <div class="col-md-12">
-              <div class="form-group">
+              <div class="form-group" formArrayName="content_wishs">
                 <label for="example-text-input" class="form-control-label">ภาคความประสงค์</label>
-                <textarea class="form-control" [(ngModel)]="docNew.doc_content_wish" formControlName="doc_content_wish"
-                  [rows]="4">
-                  </textarea>
+                <div *ngFor="let content_wish of content_wishs.controls; let i=index">
+                  <div class="form-group row" [formGroupName]="i">
+                    <div class="col-md-10">
+                      <textarea class="form-control" formControlName="content_wish" [rows]="4">
+                      </textarea>
+                    </div>
+                    <div class="col-md-2">
+                      <button class="btn btn-secondary btn-sm" (click)="removeContentWish(i)">ลบ</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-group row">
+
+                <div class="col-md-4">
+                  <button class="btn btn-primary btn-sm" (click)="addContentWish()">เพิ่ม</button>
+                </div>
               </div>
             </div>
             <div class="col-md-12">
@@ -254,3 +293,56 @@
   </div>
 
 </div>
+
+<!-- <div class="row">
+  <form [formGroup]="skillsForm" (ngSubmit)="onSubmit()">
+ 
+    <p>
+      <label for="name">Name </label>
+      <input type="text" id="name" name="name" formControlName="name">
+    </p>
+   
+   <p>
+      <button type="submit">Submit</button>
+    </p>
+    Skills:
+    <div formArrayName="skills">
+      <div *ngFor="let skill of skills.controls; let i=index">
+        <div [formGroupName]="i">
+          {{i}}
+          skill name :
+          <input type="text" formControlName="skill">
+          exp:
+          <input type="text" formControlName="exp">
+   
+          <button (click)="removeSkill(i)">Remove</button>
+        </div>
+      </div>
+    </div>
+    <p>
+      <button type="button" (click)="addSkills()">Add</button>
+    </p>
+  </form>
+</div> -->
+
+<!-- <div class="row">
+  <div class="col" [formGroup]="form">
+    <ng-container formArrayName="lessons">
+      <ng-container *ngFor="let lessonForm of lessons.controls; let i = index">
+        <div class="lesson-form-row"  [formGroup]="lessonForm">
+          <div class="form-group row">
+            <input matInput
+              formControlName="title"
+              placeholder="Lesson title">
+          </div>
+          <div class="form-group row">
+            <input matInput
+              formControlName="level"
+              placeholder="Lesson level">
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+</div> -->
