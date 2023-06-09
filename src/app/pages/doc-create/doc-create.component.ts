@@ -95,11 +95,13 @@ export class DocCreateComponent implements OnInit {
     this.docNew.sender = Sender;
 
     this.creatForm = this.fb.group({
+      userid: [userId, Validators.required],
       docdate: ['', Validators.required],
       secrets: ['1', Validators.required],
       rapid: ['1', Validators.required],
       doctype: ['1', Validators.required],
       depart_government_id: [departId, Validators.required],
+      depart_id_user: [departId, Validators.required],
       receivers: this.fb.array([]),
       headline: ['', Validators.required],
       doc_content: ['', Validators.required],
@@ -107,7 +109,8 @@ export class DocCreateComponent implements OnInit {
       doc_content_conc: ['', Validators.required],
       comment: ['', Validators.required],
       tposition_id: ['', Validators.required],
-      //sender: ['', Validators.required],
+      sender: [Sender, Validators.required],
+      senderdepart: [departName, Validators.required],
       destroy_year: ['1', Validators.required],
     });
 
@@ -131,6 +134,9 @@ export class DocCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.addReceiver(); // เรียน
+    this.addContentWish(); // เนื้อหาหนังสือ ความประสงค์
 
   }
 
@@ -175,7 +181,7 @@ export class DocCreateComponent implements OnInit {
   // เพิ่ม
   addContentWish() {
     const contentWishForm = this.fb.group({
-      content_wish: ['', Validators.required],
+      doc_content_wish: ['', Validators.required],
     })
     this.content_wishs.push(contentWishForm);
   }
@@ -319,16 +325,10 @@ export class DocCreateComponent implements OnInit {
   }
 
   //doc
-
-
-  createNewDocument1(angFormNew: any) {
-    console.log('create new form: ', angFormNew);
-  }
-
   createNewDocument() {
-    console.log('create new document: ', this.docNew);
+    console.log('create new document: ', this.creatForm.value);
     this.httpClient
-      .post<createDocForm>(environment.baseUrl + '/send/_sendto_document.php', this.docNew, {
+      .post<createDocForm>(environment.baseUrl + '/send/_sendto_document.php', this.creatForm.value, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -336,9 +336,8 @@ export class DocCreateComponent implements OnInit {
       .subscribe((res: any) => {
         console.log('resig Form: ', res);
         //this.generatePdfFile();
-        this.createPDF();
-        this.router.navigate(['/doc-ouside']);
-
+        //this.createPDF();
+        //this.router.navigate(['/doc-ouside']);
       });
   }
 
