@@ -11,11 +11,14 @@ import { SettingComponent } from './pages/setting/setting.component';
 import { FormNewComponent } from './pages/form-new/form-new.component';
 import { DocInsideComponent } from './pages/doc-inside/doc-inside.component';
 import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
+import { OfferComponent } from './pages/offer/offer.component';
+import { OfferSignComponent } from './pages/offer-sign/offer-sign.component';
+import { OfferApprovComponent } from './pages/offer-approv/offer-approv.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'doc-create',
+    redirectTo: 'offer-approv/479567',
     pathMatch: 'full',
   },
   {path: 'home', component: HomeComponent},
@@ -28,9 +31,10 @@ const routes: Routes = [
   {path: 'doc-create', component: DocCreateComponent},
   {path: 'newdoc', component:NewdocComponent},
   {path: 'doc-inside', component:DocInsideComponent},
-  {path: 'doc-outside', component:DocOusideComponent}
-
-
+  {path: 'doc-outside', component:DocOusideComponent},
+  {path: 'offer', component:OfferComponent},
+  {path: 'offer-sign/:id', component:OfferSignComponent},
+  {path: 'offer-approv/:id', component:OfferApprovComponent}
 ];
 
 @NgModule({

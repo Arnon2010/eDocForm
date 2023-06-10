@@ -133,6 +133,19 @@ export class ApiService {
     );
   }
 
+  // รายละเอียดหนังสือที่เสนอลงนาม
+  public apiApporvDocDetail(main_id:any) {
+    let api = environment.baseUrl + '/send/_approv_doc_detail.php?main_id=' + main_id;
+    return this.httpClient.get(api, { headers: this.headers })
+    .pipe(map((res:any) => {
+        return res.data || [];
+    }),
+    catchError(this.handleError)
+    );
+  }
+
+
+
   //test student
   public apiStd() {
     let api = 'https://sis.rmutsv.ac.th/sis/api/pdo_mysql_std_dev.php?opt=readone&g_student=163401040079' ;

@@ -1,0 +1,149 @@
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header pb-0">
+                <div class="d-flex align-items-center">
+                    <p class="mb-0">
+                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i>
+                        รายละเอียดหนังสือ
+                    </p>
+                    <button class="btn btn-primary btn-sm ms-auto">Template</button>
+                </div>
+            </div>
+            <div class="card-body" id="pdfTable" #pdfTable="">
+                <div class="row">
+                    <div class="form-group row">
+                        <div class="col-md-3">ชั้นความลับ: &nbsp;</div>
+                        <div class="col-md-4">{{doc.Secrets}}</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">ความเร่งด่วน: &nbsp;</div>
+                        <div class="col-md-4">{{doc.Rapid}}</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">ประเภทหนังสือ: &nbsp;</div>
+                        <div class="col-md-4">ปกติ</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">หน่วยงาน ส่วนราชการ: &nbsp;</div>
+                        <div class="col-md-4">ปกติ</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">เรียน: &nbsp;</div>
+                        <div class="col-md-4">ปกติ</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">เรื่อง: &nbsp;</div>
+                        <div class="col-md-4">ปกติ</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">รายละเอียดหนังสือ: &nbsp;</div>
+                        <div class="col-md-4">ปกติ</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">การปฏิบัติ: &nbsp;</div>
+                        <div class="col-md-4">ปกติ</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">ผู้ดำเนินการ: &nbsp;</div>
+                        <div class="col-md-4">ปกติ</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">หน่วยงาน: &nbsp;</div>
+                        <div class="col-md-4">ปกติ</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">อายุหนังสือ: &nbsp;</div>
+                        <div class="col-md-4">1 ปี</div>
+                    </div>
+
+                </div>
+
+
+                <hr class="horizontal dark">
+                <p class="text-uppercase text-sm"></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card card-profile">
+            <!-- <span class="card-img-top"></span> -->
+            <!-- <div class="row justify-content-center">
+                <div class="col-4 col-lg-4 order-lg-2">
+                    <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
+                        <a href="javascript:;">
+                            <img src="../assets/img/team-2.jpg"
+                                class="rounded-circle img-fluid border border-2 border-white">
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+            <div class="card-header text-center">
+                <div class="d-flex justify-content-between">
+                    <h6>เลือกผู้บังคับบัญชา และวิธีการเสนอหนังสือ</h6>
+
+                </div>
+
+            </div>
+            <div class="card-body pt-0">
+                <div class="row">
+                    <div class="col">
+                        <form role="form" [formGroup]="creatForm" autocomplete="on">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" formControlName="secrets"
+                                                value="1">
+                                            <label class="form-check-label" for="inlineRadio1">เสนอแบบกำหนดเอง</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" formControlName="secrets"
+                                                value="2">
+                                            <label class="form-check-label"
+                                                for="inlineRadio2">เสนออัตโนมัติตามลำดับ</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <select class="form-select" formControlName="doctype"
+                                            aria-label="Default select example">
+                                            <option *ngFor="let item of takeposition_list" value="{{item.Id}}">
+                                                {{item.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <h5>
+                        Mark Davis<span class="font-weight-light">, 35</span>
+                    </h5>
+                    <div class="h6 font-weight-300">
+                        <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                    </div>
+                    <div class="h6 mt-4">
+                        <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                    </div>
+                    <div>
+                        <i class="ni education_hat mr-2"></i>University of Computer Science
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

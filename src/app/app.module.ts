@@ -26,6 +26,9 @@ import { PdfLibComponent } from './pages/pdf-lib/pdf-lib.component';
 import { NewdocComponent } from './pages/newdoc/newdoc.component';
 import { DocInsideComponent } from './pages/doc-inside/doc-inside.component';
 import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
+import { OfferSignComponent } from './pages/offer-sign/offer-sign.component';
+import { OfferComponent } from './pages/offer/offer.component';
+import { OfferApprovComponent } from './pages/offer-approv/offer-approv.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
     PdfLibComponent,
     NewdocComponent,
     DocInsideComponent,
-    DocOusideComponent
+    DocOusideComponent,
+    OfferSignComponent,
+    OfferComponent,
+    OfferApprovComponent
   ],
   imports: [
     BrowserModule,

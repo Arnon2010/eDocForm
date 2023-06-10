@@ -52,6 +52,7 @@ export class DocCreateComponent implements OnInit {
     rapid: '1',
     depart_id_user: 0,
     depart_government_id: 0,
+    contact: '',
     comment: '',
     headline: '',
     receiver: '',
@@ -101,6 +102,7 @@ export class DocCreateComponent implements OnInit {
       rapid: ['1', Validators.required],
       doctype: ['1', Validators.required],
       depart_government_id: [departId, Validators.required],
+      contact: ['', Validators.required],
       depart_id_user: [departId, Validators.required],
       receivers: this.fb.array([]),
       headline: ['', Validators.required],
@@ -328,16 +330,18 @@ export class DocCreateComponent implements OnInit {
   createNewDocument() {
     console.log('create new document: ', this.creatForm.value);
     this.httpClient
-      .post<createDocForm>(environment.baseUrl + '/send/_sendto_document.php', this.creatForm.value, {
+      .post<createDocForm>(environment.baseUrl + '/send/_approv_document.php', this.creatForm.value, {
         headers: {
           'Content-Type': 'application/json',
         },
       })
       .subscribe((res: any) => {
         console.log('resig Form: ', res);
+        var edoc_id = res.data[0].edocId;
+
         //this.generatePdfFile();
         //this.createPDF();
-        //this.router.navigate(['/doc-ouside']);
+        this.router.navigate(['/offer-approv/' + edoc_id]);
       });
   }
 
@@ -433,6 +437,7 @@ export interface createDocForm {
   rapid: String;
   depart_id_user: Number;
   depart_government_id: Number;
+  contact: string;
   comment: string;
   headline: String;
   receiver: String;
@@ -453,6 +458,7 @@ export interface updateDocForm {
   rapid: String;
   depart_id_user: String;
   depart_government_id: Number;
+  contact: string;
   comment: string;
   headline: String;
   receiver: String;
