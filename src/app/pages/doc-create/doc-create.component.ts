@@ -51,7 +51,7 @@ export class DocCreateComponent implements OnInit {
     secrets: '1',
     rapid: '1',
     depart_id_user: 0,
-    depart_government_id: 0,
+    depart_government: '',
     contact: '',
     comment: '',
     headline: '',
@@ -90,7 +90,7 @@ export class DocCreateComponent implements OnInit {
 
     //set default form create new document.
     this.docNew.userid = userId;
-    this.docNew.depart_government_id = departId;
+    this.docNew.depart_government = departName;
     this.docNew.depart_id_user = departId;
     this.docNew.senderdepart = departName;
     this.docNew.sender = Sender;
@@ -101,7 +101,7 @@ export class DocCreateComponent implements OnInit {
       secrets: ['1', Validators.required],
       rapid: ['1', Validators.required],
       doctype: ['1', Validators.required],
-      depart_government_id: [departId, Validators.required],
+      depart_government: [departName, Validators.required],
       contact: ['', Validators.required],
       depart_id_user: [departId, Validators.required],
       receivers: this.fb.array([]),
@@ -436,7 +436,7 @@ export interface createDocForm {
   secrets: String;
   rapid: String;
   depart_id_user: Number;
-  depart_government_id: Number;
+  depart_government: string;
   contact: string;
   comment: string;
   headline: String;
@@ -457,7 +457,7 @@ export interface updateDocForm {
   secrets: String;
   rapid: String;
   depart_id_user: String;
-  depart_government_id: Number;
+  depart_government: string;
   contact: string;
   comment: string;
   headline: String;

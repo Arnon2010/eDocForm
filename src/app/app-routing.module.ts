@@ -18,7 +18,7 @@ import { OfferApprovComponent } from './pages/offer-approv/offer-approv.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'offer-approv/479567',
+    redirectTo: 'offer-approv/479567/123',
     pathMatch: 'full',
   },
   {path: 'home', component: HomeComponent},
@@ -34,7 +34,7 @@ const routes: Routes = [
   {path: 'doc-outside', component:DocOusideComponent},
   {path: 'offer', component:OfferComponent},
   {path: 'offer-sign/:id', component:OfferSignComponent},
-  {path: 'offer-approv/:id', component:OfferApprovComponent}
+  {path: 'offer-approv/:id/:tposition', component:OfferApprovComponent}
 ];
 
 @NgModule({

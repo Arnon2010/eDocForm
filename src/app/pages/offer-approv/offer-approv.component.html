@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
@@ -7,64 +7,100 @@
                         <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i>
                         รายละเอียดหนังสือ
                     </p>
-                    <button class="btn btn-primary btn-sm ms-auto">Template</button>
+                    <button class="btn btn-warning btn-sm ms-auto">แก้ไข</button>
+                    <button class="btn btn-primary btn-sm ms-auto" (click)="isCollapsed = !isCollapsed"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseDetail">เพิ่มเติม...</button>
+
                 </div>
             </div>
-            <div class="card-body" id="pdfTable" #pdfTable="">
+            <div class="card-body">
                 <div class="row">
-                    <div class="form-group row">
-                        <div class="col-md-3">ชั้นความลับ: &nbsp;</div>
-                        <div class="col-md-4">{{doc.Secrets}}</div>
+                    <div id="collapseDetail" [ngbCollapse]="isCollapsed">
+                        <div class="form-group row">
+                            <div class="col-md-4">ชั้นความลับ:</div>
+                            <div class="col-md-8">
+                                <h6>{{doc.Secrets}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">ความเร่งด่วน:</div>
+                            <div class="col-md-8">
+                                <h6>{{doc.Rapid}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">ประเภทหนังสือ: &nbsp;</div>
+                            <div class="col-md-8">
+                                <h6>{{doc.docTypeName}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">ส่วนราชการ: &nbsp;</div>
+                            <div class="col-md-8">
+                                <h6>{{doc.senderDepart}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">ข้อมูลการติดต่อ: &nbsp;</div>
+                            <div class="col-md-8">
+                                <h6>{{doc.Contact}}</h6>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-3">ความเร่งด่วน: &nbsp;</div>
-                        <div class="col-md-4">{{doc.Rapid}}</div>
+                        <div class="col-md-4">เรื่อง: &nbsp;</div>
+                        <div class="col-md-8">
+                            <h6>{{doc.Headline}}</h6>
+                        </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-3">ประเภทหนังสือ: &nbsp;</div>
-                        <div class="col-md-4">ปกติ</div>
+                        <div class="col-md-4">เรียน: &nbsp;</div>
+                        <div class="col-md-8">
+                            <h6>{{doc.Receiver}}</h6>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-4">รายละเอียดหนังสือ: &nbsp;</div>
+                        <div class="col-md-8">
+                            <h6>{{doc.docContent}}</h6>
+                        </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-3">หน่วยงาน ส่วนราชการ: &nbsp;</div>
-                        <div class="col-md-4">ปกติ</div>
+                        <div class="col-md-4">การปฏิบัติ: &nbsp;</div>
+                        <div class="col-md-8">
+                            <h6>{{doc.Comment}}</h6>
+                        </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-3">เรียน: &nbsp;</div>
-                        <div class="col-md-4">ปกติ</div>
+                        <div class="col-md-4">ผู้ดำเนินการ: &nbsp;</div>
+                        <div class="col-md-8">
+                            <h6>{{doc.userMaker}}</h6>
+                        </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-3">เรื่อง: &nbsp;</div>
-                        <div class="col-md-4">ปกติ</div>
+                        <div class="col-md-4">หน่วยงาน: &nbsp;</div>
+                        <div class="col-md-8">
+                            <h6>{{doc.departName}}</h6>
+                        </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-3">รายละเอียดหนังสือ: &nbsp;</div>
-                        <div class="col-md-4">ปกติ</div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-3">การปฏิบัติ: &nbsp;</div>
-                        <div class="col-md-4">ปกติ</div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-3">ผู้ดำเนินการ: &nbsp;</div>
-                        <div class="col-md-4">ปกติ</div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-3">หน่วยงาน: &nbsp;</div>
-                        <div class="col-md-4">ปกติ</div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-3">อายุหนังสือ: &nbsp;</div>
-                        <div class="col-md-4">1 ปี</div>
+                        <div class="col-md-4">อายุหนังสือ: &nbsp;</div>
+                        <div class="col-md-8">
+                            <h6>{{doc.destroyYear}} ปี</h6>
+                        </div>
                     </div>
 
                 </div>
@@ -75,7 +111,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="card card-profile">
             <!-- <span class="card-img-top"></span> -->
             <!-- <div class="row justify-content-center">
@@ -98,9 +134,9 @@
             <div class="card-body pt-0">
                 <div class="row">
                     <div class="col">
-                        <form role="form" [formGroup]="creatForm" autocomplete="on">
+                        <form role="form" [formGroup]="apporvForm" autocomplete="on">
                             <div class="form-group row">
-                                <div class="col-md-12">
+                                <!-- <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" formControlName="secrets"
@@ -114,17 +150,32 @@
                                                 for="inlineRadio2">เสนออัตโนมัติตามลำดับ</label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <select class="form-select" formControlName="doctype"
-                                            aria-label="Default select example">
-                                            <option *ngFor="let item of takeposition_list" value="{{item.Id}}">
-                                                {{item.Name}}
-                                            </option>
-                                        </select>
+                                    <div formArrayName="take_positions" *ngFor="let cards of take_positions.controls; let i=index">
+                                        <div class="form-group row" [formGroupName]="i">
+                                            <div class="col-md-10">
+                                                <select class="form-select" formControlName="tposition_id"
+                                                    aria-label="Default select example">
+                                                    <option *ngFor="let item of takeposition_list" value="{{item.Id}}">
+                                                        {{item.Name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button class="btn btn-secondary btn-sm"
+                                                    (click)="removeTakePosition(i)">ลบ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-5">
+                                            <button class="btn btn-primary btn-sm"
+                                                (click)="addTakePosition()"><i class="ni ni-fat-add"></i> ลำดับลงนามถัดไป</button>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </form>
                     </div>

@@ -92,10 +92,12 @@
             <div class="col-md-8">
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">หน่วยงาน ส่วนราชการ</label>
-                <select id="depart_government_id" class="form-select" [(ngModel)]="docNew.depart_government_id"
+                <!-- <select id="depart_government_id" class="form-select" [(ngModel)]="docNew.depart_government_id"
                   formControlName="depart_government_id" aria-label="Default select example">
-                  <option *ngFor="let item of deptgovernment_list" [ngValue]="item.Id">{{item.Name}}</option>
-                </select>
+                  <option *ngFor="let item of deptgovernment_list" [ngValue]="item.Name">{{item.Name}}</option>
+                </select> -->
+                <input class="form-control" type="text" [(ngModel)]="docNew.depart_government" formControlName="depart_government">
+
               </div>
             </div>
 

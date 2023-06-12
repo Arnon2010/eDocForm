@@ -7,6 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { main } from '@popperjs/core';
+import { JsonPipe } from '@angular/common';
+
+import { Observable, of } from "rxjs";
+import { switchMap, map } from "rxjs/operators";
 
 @Component({
   selector: 'app-offer-approv',
@@ -15,7 +19,9 @@ import { main } from '@popperjs/core';
 })
 export class OfferApprovComponent implements OnInit {
 
-  creatForm:FormGroup;
+  apporvForm: FormGroup;
+
+  public isCollapsed = true; //ซ่อนรายละเอียดหนังสือ
 
   doctype_list: any = [];
   deptgovernment_list: any = [];
@@ -43,7 +49,10 @@ export class OfferApprovComponent implements OnInit {
     senderDepart: '',
     destroyYear: '',
   }
- 
+  mainId: string | null;
+  tpositionId: string | null | undefined;
+  static dataService: any;
+
   constructor(private route: ActivatedRoute,
     private fb: FormBuilder,
     private dataService: ApiService,
@@ -51,47 +60,44 @@ export class OfferApprovComponent implements OnInit {
     private httpClient: HttpClient,
     private sanitizer: DomSanitizer) {
 
-      const token: any = this.dataService.getToken();
-      let user = JSON.parse(token);
-      var userId = user.userId;//รหัสผู้ใช้
-      var departId = user.departId; // รหัสหน่วยงาน
-      var userType = user.userType; //ประเภทผู้ใช้
-      var univId = user.univId; // รหัสพื้นที่
-      var departName = user.departName; // ชื่อหน่วยงาน
-      var Sender = user.Fname + ' ' + user.Lname; // ผู้ส่ง
+    const token: any = this.dataService.getToken();
+    let user = JSON.parse(token);
+    var userId = user.userId;//รหัสผู้ใช้
+    var departId = user.departId; // รหัสหน่วยงาน
+    var userType = user.userType; //ประเภทผู้ใช้
+    var univId = user.univId; // รหัสพื้นที่
+    var departName = user.departName; // ชื่อหน่วยงาน
+    var Sender = user.Fname + ' ' + user.Lname; // ผู้ส่ง
 
-      this.creatForm = this.fb.group({
-        userid: [userId, Validators.required],
-        docdate: ['', Validators.required],
-        secrets: ['1', Validators.required],
-        rapid: ['1', Validators.required],
-        doctype: ['1', Validators.required],
-        depart_government_id: [departId, Validators.required],
-        contact: ['', Validators.required],
-        depart_id_user: [departId, Validators.required],
-        receivers: this.fb.array([]),
-        headline: ['', Validators.required],
-        doc_content: ['', Validators.required],
-        content_wishs: this.fb.array([]),
-        doc_content_conc: ['', Validators.required],
-        comment: ['', Validators.required],
-        tposition_id: ['', Validators.required],
-        sender: [Sender, Validators.required],
-        senderdepart: [departName, Validators.required],
-        destroy_year: ['1', Validators.required],
-      });
+    this.mainId = this.route.snapshot.paramMap.get('id'); // sign main id
+    let position_id = this.route.snapshot.paramMap.get('tposition'); // take position id
+    this.doc.tpositionId = position_id;
+    
+    this.apporvForm = this.fb.group({
+      userid: [userId, Validators.required],
+      main_id: [this.mainId, Validators.required],
+      depart_id: [departId, Validators.required],
+      take_positions: this.fb.array([])
+    });
 
-      //ผู้ลงนาม และตำแหน่ง
-      this.takePosition(departId);
+    //ผู้ลงนาม และตำแหน่ง
+    this.takePosition(departId);
 
-    }
+
+  }
 
   ngOnInit(): void {
-
-    var mainId = this.route.snapshot.paramMap.get('id');
-    console.log('param mainId: ', mainId);
-    this.apporvDocDetail(mainId);
+    this.addTakePosition();
+    this.docDetail(this.mainId);
   }
+
+  //  getData(main_id:any): Observable<string> {
+  //   return this.dataService.apiApporvDocDetail(main_id)
+  //   .subscribe((res: any) => {
+  //     var temp = res[0];
+     
+  //   });
+  // }
 
   // ผู้ลงนาม และตำแหน่ง
   takePosition(departid: any) {
@@ -104,18 +110,70 @@ export class OfferApprovComponent implements OnInit {
   }
 
   // รายละเอียดหนังสือ
-  apporvDocDetail(mainid: any) {
+  docDetail(mainid: any) {
     this.dataService.apiApporvDocDetail(mainid)
-    .subscribe((res: any) => {
-      this.doc = res[0];
-      console.log('รายละเอียดหนังสือ: ', this.doc);
-    })
+      .subscribe((res: any) => {
+        var temp = res[0];
+        this.doc = temp;
+        //this.doc.tpositionId = temp.tpositionId;//ผบ.
+        console.log('รายละเอียดหนังสือ: ', this.doc);
+      })
   }
+
+
+
+  /** Form ctrl tpositionId เพิ่มผู้บังคับบัญชา */
+  get take_positions(): FormArray {
+    return this.apporvForm.get('take_positions') as FormArray
+  }
+
+  // เพิ่ม form ctrl receiver
+  addTakePosition() {
+    console.log('this.doc.tpositionId: ',this.tpositionId);
+    const arrayForm = this.fb.group({
+      tposition_id: [this.doc.tpositionId, Validators.required],
+     
+    })
+    this.take_positions.push(arrayForm);
+  }
+
+  // เพิ่ม
+  addTakePosition_test() {
+    const creds = this.apporvForm.controls['take_positions'] as FormArray;
+    creds.push(
+      this.fb.group({
+        tposition_id: [this.tpositionId, [Validators.required]]
+      })
+    );
+  }
+
+  // ลบ
+  removeTakePosition(i: number) {
+    this.take_positions.removeAt(i);
+  }
+
+  
+
+  // getTotalQuestions(mainid:string): Observable<string> {
+  //   let totalQuestions:number;
+  //   var subject = new Subject<string>();
+  //   this.dataService.apiApporvDocDetail(mainid)
+  //   .subscribe(items => {
+  //       items.map((item: { Total: number; }) => {
+    
+  //         totalQuestions=item.Total;
+  //         console.log(totalQuestions);
+  //         subject.next(totalQuestions);
+  //       });
+  //     }
+  //   );
+  //     return subject.asObservable();
+  //   }
 
 }
 
 export interface docDetail {
- 
+
   edocId: Number;
   docDate: String;
   docTypeName: String;
