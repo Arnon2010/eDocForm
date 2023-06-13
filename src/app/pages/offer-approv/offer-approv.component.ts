@@ -82,8 +82,6 @@ export class OfferApprovComponent implements OnInit {
 
     //ผู้ลงนาม และตำแหน่ง
     this.takePosition(departId);
-
-
   }
 
   ngOnInit(): void {
@@ -150,9 +148,12 @@ export class OfferApprovComponent implements OnInit {
   // ลบ
   removeTakePosition(i: number) {
     this.take_positions.removeAt(i);
-  }
+  } 
 
-  
+  // ยืนยันเสนอนหนังสือเพื่อลงนาม
+  docConfirmApprov() {
+    
+  }
 
   // getTotalQuestions(mainid:string): Observable<string> {
   //   let totalQuestions:number;
