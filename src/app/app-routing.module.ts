@@ -18,7 +18,7 @@ import { OfferApprovComponent } from './pages/offer-approv/offer-approv.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'offer-approv/479567/123',
+    redirectTo: 'offer-approv/479568/123',
     pathMatch: 'full',
   },
   {path: 'home', component: HomeComponent},
