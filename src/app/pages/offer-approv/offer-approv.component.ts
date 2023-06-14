@@ -153,6 +153,20 @@ export class OfferApprovComponent implements OnInit {
   // ยืนยันเสนอนหนังสือเพื่อลงนาม
   docConfirmApprov() {
     console.log('doc detail: ', this.doc);
+    //console.log('create new document: ', this.docNew);
+    this.httpClient
+      .post<docDetail>(environment.baseUrl + '/send/_approv_doc_add.php', this.doc, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .subscribe((res: any) => {
+        console.log('resig Form: ', res);
+        //this.generatePdfFile();
+
+        this.router.navigate(['/home']);
+
+      });
   }
 
   // create pdf
