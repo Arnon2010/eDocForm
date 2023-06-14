@@ -29,6 +29,7 @@ import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
 import { OfferSignComponent } from './pages/offer-sign/offer-sign.component';
 import { OfferComponent } from './pages/offer/offer.component';
 import { OfferApprovComponent } from './pages/offer-approv/offer-approv.component';
+import { DocOutsideCreateComponent } from './pages/doc-outside-create/doc-outside-create.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { OfferApprovComponent } from './pages/offer-approv/offer-approv.componen
     DocOusideComponent,
     OfferSignComponent,
     OfferComponent,
-    OfferApprovComponent
+    OfferApprovComponent,
+    DocOutsideCreateComponent
   ],
   imports: [
     BrowserModule,

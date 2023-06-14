@@ -64,6 +64,7 @@ export class OfferApprovComponent implements OnInit {
     let user = JSON.parse(token);
     var userId = user.userId;//รหัสผู้ใช้
     var departId = user.departId; // รหัสหน่วยงาน
+    
     var userType = user.userType; //ประเภทผู้ใช้
     var univId = user.univId; // รหัสพื้นที่
     var departName = user.departName; // ชื่อหน่วยงาน
@@ -117,8 +118,6 @@ export class OfferApprovComponent implements OnInit {
         console.log('รายละเอียดหนังสือ: ', this.doc);
       })
   }
-
-
 
   /** Form ctrl tpositionId เพิ่มผู้บังคับบัญชา */
   get take_positions(): FormArray {

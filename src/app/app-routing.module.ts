@@ -18,7 +18,8 @@ import { OfferApprovComponent } from './pages/offer-approv/offer-approv.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'offer-approv/479568/123',
+    redirectTo: 'offer-approv/479573/123',
+    //redirectTo: 'home',
     pathMatch: 'full',
   },
   {path: 'home', component: HomeComponent},
@@ -28,7 +29,7 @@ const routes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'setting', component: SettingComponent},
   {path: 'form-new', component: FormNewComponent},
-  {path: 'doc-create', component: DocCreateComponent},
+  {path: 'doc-create/:param', component: DocCreateComponent},
   {path: 'newdoc', component:NewdocComponent},
   {path: 'doc-inside', component:DocInsideComponent},
   {path: 'doc-outside', component:DocOusideComponent},
