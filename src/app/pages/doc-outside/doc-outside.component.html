@@ -1,0 +1,351 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header pb-0">
+          <div class="d-flex align-items-center">
+            <p class="mb-0">
+              <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i>
+              สร้างหนังสือ  
+            </p>
+            <button class="btn btn-primary btn-sm ms-auto">หนังสือภายนอก</button>
+          </div>
+        </div>
+        <div class="card-body" id="pdfTable" #pdfTable="">
+          <form role="form" [formGroup]="creatForm" autocomplete="on">
+            <p class="text-uppercase text-sm">ข้อมูลทั่วไป</p>
+            <div class="row">
+              <!-- <div class="col-md-6">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">วันที่หนังสือ</label>
+                  <input class="form-control" type="text" [(ngModel)]="docNew.docdate" formControlName="docdate">
+                </div>
+              </div> -->
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label col-md-2">ชั้นความลับ: &nbsp;</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.secrets" formControlName="secrets"
+                        value="1">
+                      <label class="form-check-label" for="inlineRadio1">ปกติ</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.secrets" formControlName="secrets"
+                        value="2">
+                      <label class="form-check-label" for="inlineRadio2">ลับ</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.secrets" formControlName="secrets"
+                        value="3">
+                      <label class="form-check-label" for="inlineRadio2">ลับมาก</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.secrets" formControlName="secrets"
+                        value="4">
+                      <label class="form-check-label" for="inlineRadio2">ลับทีสุด</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label col-md-2">ความเร่งด่วน: &nbsp;</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.rapid" formControlName="rapid"
+                        value="1">
+                      <label class="form-check-label" for="inlineRadio1">ปกติ</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.rapid" formControlName="rapid"
+                        value="2">
+                      <label class="form-check-label" for="inlineRadio2">ด่วน</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.rapid" formControlName="rapid"
+                        value="3">
+                      <label class="form-check-label" for="inlineRadio2">ด่วนมาก</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.rapid" formControlName="rapid"
+                        value="4">
+                      <label class="form-check-label" for="inlineRadio2">ด่วนทีสุด</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+              <!-- <div class="col-md-12">
+               <div class="form-group">
+                  <label for="example-text-input" class="form-control-label col-4">ประเภทหนังสือ: </label>
+                  <select class="form-select" [(ngModel)]="docNew.doctype" formControlName="doctype"
+                    aria-label="Default select example">
+                    <option *ngFor="let item of doctype_list" value="{{item.Id}}">{{item.Name}}</option>
+                  </select>
+                </div>
+              </div> -->
+  
+            </div>
+  
+            <hr class="horizontal dark">
+            <p class="text-uppercase text-sm">ข้อมูลหนังสือ</p>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">หน่วยงาน ส่วนราชการ</label>
+                  <!-- <select id="depart_government_id" class="form-select" [(ngModel)]="docNew.depart_government_id"
+                    formControlName="depart_government_id" aria-label="Default select example">
+                    <option *ngFor="let item of deptgovernment_list" [ngValue]="item.Name">{{item.Name}}</option>
+                  </select> -->
+                  <input class="form-control" type="text" [(ngModel)]="docNew.depart_government" formControlName="depart_government">
+  
+                </div>
+              </div>
+  
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">ข้อมูลติดต่อ</label>
+                  <input class="form-control" type="text" [(ngModel)]="docNew.contact" formControlName="contact">
+                </div>
+              </div>
+  
+              <div class="col-md-10">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">เรื่อง</label>
+                  <input class="form-control" type="text" [(ngModel)]="docNew.headline" formControlName="headline">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group" formArrayName="receivers">
+                  <label for="example-text-input" class="form-control-label">เรียน</label>
+                  <!-- <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" [checked]="isChecked">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">เสนอมากว่า 1 ฉบับ</label>
+                  </div> -->
+  
+                  <!-- <div class="form-group row" *ngIf="isChecked">
+                    <div class="col-md-4">
+                      <input class="form-control" type="text" [(ngModel)]="docNew.receiver" formControlName="receiver"
+                        placeholder="ข้อความ">
+                    </div>
+                    <div class="col-md-6">
+                      <select class="form-select" aria-label="select example" [(ngModel)]="docNew.depart_government_id"
+                        formControlName="depart_government_id">
+                        <option *ngFor="let item of deptgovernment_list" [ngValue]="item.Id">{{item.Name}}</option>
+                      </select>
+                    
+                    </div>
+                    <div class="col-md-2">
+                      <button class="btn btn-primary btn-sm" (click)="addReceiver()">เพิ่ม</button>
+                    </div>
+                  </div> -->
+                  <div *ngFor="let receiver of receivers.controls; let i=index">
+                    <div class="form-group row" [formGroupName]="i">
+                      <div class="col-md-10">
+                        <input class="form-control" type="text" formControlName="receiver" placeholder="ข้อความ">
+                      </div>
+                      <div class="col-md-2">
+                        <button class="btn btn-secondary btn-sm" (click)="removeReceiver(i)">ลบ</button>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row">
+                    
+                    <div class="col-md-2">
+                      <button class="btn btn-primary btn-sm" (click)="addReceiver()">เพิ่ม</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">รายละเอียดหนังสือ</label>
+                    <angular-editor [(ngModel)]="docNew.doc_content" formControlName="doc_content" [config]="config" #textEditor></angular-editor>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div>{{docNew.doc_content}}</div>
+                  <div [innerHTML]="sanitizeHtml(docNew.doc_content)"></div>
+                </div> -->
+  
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">ภาคเหตุ</label>
+                  <textarea class="form-control" [(ngModel)]="docNew.doc_content" formControlName="doc_content"
+                    [rows]="6">
+                    </textarea>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group" formArrayName="content_wishs">
+                  <label for="example-text-input" class="form-control-label">ภาคความประสงค์</label>
+                  <div *ngFor="let doc_content_wish of content_wishs.controls; let i=index">
+                    <div class="form-group row" [formGroupName]="i">
+                      <div class="col-md-10">
+                        <textarea class="form-control" formControlName="doc_content_wish" [rows]="4">
+                        </textarea>
+                      </div>
+                      <div class="col-md-2">
+                        <button class="btn btn-secondary btn-sm" (click)="removeContentWish(i)">ลบ</button>
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+                <div class="form-group row">
+  
+                  <div class="col-md-4">
+                    <button class="btn btn-primary btn-sm" (click)="addContentWish()">เพิ่ม</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">ภาคสรุป</label>
+                  <textarea class="form-control" [(ngModel)]="docNew.doc_content_conc" formControlName="doc_content_conc"
+                    [rows]="2">
+                    </textarea>
+                </div>
+              </div>
+  
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">การปฏิบัติ</label>
+                  <textarea class="form-control" cols="180" [rows]="2" id="Comment" [(ngModel)]="docNew.comment"
+                    formControlName="comment" [rows]="3"></textarea>
+                </div>
+              </div>
+  
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label col-md-2">อายุหนังสือ: &nbsp;</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.destroy_year"
+                        formControlName="destroy_year" value="1">
+                      <label class="form-check-label" for="inlineRadio1">1 ปี</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.destroy_year"
+                        formControlName="destroy_year" value="5">
+                      <label class="form-check-label" for="inlineRadio2">5 ปี</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" [(ngModel)]="docNew.destroy_year"
+                        formControlName="destroy_year" value="10">
+                      <label class="form-check-label" for="inlineRadio2">10 ปี</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">ผู้ลงนาม /ตำแหน่ง</label>
+                    <select class="form-select" [(ngModel)]="docNew.tposition_id" (ngModelChange)="Position($event, '26')"
+                      formControlName="tposition_id" aria-label="Default select example">
+                      <option *ngFor="let item of takeposition_list" value="{{item.Id}}">{{item.Name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- <div class="form-group row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">ตำแหน่ง</label>
+                      <select class="form-select" [(ngModel)]="docNew.position_id" formControlName="position_id" aria-label="Default select example">
+                        <option *ngFor="let item of position_list" value="{{item.Id}}">{{item.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div> -->
+  
+            </div>
+            <hr class="horizontal dark">
+            <p class="text-uppercase text-sm"></p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="d-flex align-items-center">
+                      <p class="mb-0">
+                        &nbsp;
+                      </p>
+                      <button class="btn btn-primary btn-sm ms-auto" type="submit" (click)="createNewDocument()">
+                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> สร้างหนังสือ</button>
+                      <!-- <button class="btn btn-primary btn-sm ms-auto" type="submit" (click)="generatePdfFile()">
+                          <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> generatePDF</button> -->
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-2">
+                      <a href="javascript:;" class="btn btn-primary btn-sm ms-auto">
+                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i> สร้างหนังสือ</a>
+                    </div> -->
+  
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  <!-- <div class="row">
+    <form [formGroup]="skillsForm" (ngSubmit)="onSubmit()">
+   
+      <p>
+        <label for="name">Name </label>
+        <input type="text" id="name" name="name" formControlName="name">
+      </p>
+     
+     <p>
+        <button type="submit">Submit</button>
+      </p>
+      Skills:
+      <div formArrayName="skills">
+        <div *ngFor="let skill of skills.controls; let i=index">
+          <div [formGroupName]="i">
+            {{i}}
+            skill name :
+            <input type="text" formControlName="skill">
+            exp:
+            <input type="text" formControlName="exp">
+     
+            <button (click)="removeSkill(i)">Remove</button>
+          </div>
+        </div>
+      </div>
+      <p>
+        <button type="button" (click)="addSkills()">Add</button>
+      </p>
+    </form>
+  </div> -->
+  
+  <!-- <div class="row">
+    <div class="col" [formGroup]="form">
+      <ng-container formArrayName="lessons">
+        <ng-container *ngFor="let lessonForm of lessons.controls; let i = index">
+          <div class="lesson-form-row"  [formGroup]="lessonForm">
+            <div class="form-group row">
+              <input matInput
+                formControlName="title"
+                placeholder="Lesson title">
+            </div>
+            <div class="form-group row">
+              <input matInput
+                formControlName="level"
+                placeholder="Lesson level">
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  
+  </div> -->

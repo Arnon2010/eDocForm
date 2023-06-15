@@ -10,10 +10,10 @@ import { SearchComponent } from './pages/search/search.component';
 import { SettingComponent } from './pages/setting/setting.component';
 import { FormNewComponent } from './pages/form-new/form-new.component';
 import { DocInsideComponent } from './pages/doc-inside/doc-inside.component';
-import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
 import { OfferComponent } from './pages/offer/offer.component';
 import { OfferSignComponent } from './pages/offer-sign/offer-sign.component';
 import { OfferApprovComponent } from './pages/offer-approv/offer-approv.component';
+import { DocOutsideComponent } from './pages/doc-outside/doc-outside.component';
 
 const routes: Routes = [
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
   {path: 'doc-create/:param', component: DocCreateComponent},
   {path: 'newdoc', component:NewdocComponent},
   {path: 'doc-inside', component:DocInsideComponent},
-  {path: 'doc-outside', component:DocOusideComponent},
+  {path: 'doc-outside', component:DocOutsideComponent},
   {path: 'offer', component:OfferComponent},
   {path: 'offer-sign/:id', component:OfferSignComponent},
   {path: 'offer-approv/:id/:tposition', component:OfferApprovComponent}

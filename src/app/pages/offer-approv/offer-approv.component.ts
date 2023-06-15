@@ -20,7 +20,6 @@ import { switchMap, map } from "rxjs/operators";
 export class OfferApprovComponent implements OnInit {
 
   apporvForm: FormGroup;
-
   public isCollapsed = true; //ซ่อนรายละเอียดหนังสือ
 
   doctype_list: any = [];
@@ -45,9 +44,12 @@ export class OfferApprovComponent implements OnInit {
     docContentWish: '',
     docContentConc: '',
     tpositionId: '',
+    tpositionName: '',
+    positionName: '',
     userMaker: '',
     senderDepart: '',
     destroyYear: '',
+    dateWrite: '',
   }
   mainId: string | null;
   tpositionId: string | null | undefined;
@@ -64,20 +66,21 @@ export class OfferApprovComponent implements OnInit {
     let user = JSON.parse(token);
     var userId = user.userId;//รหัสผู้ใช้
     var departId = user.departId; // รหัสหน่วยงาน
-    
+
     var userType = user.userType; //ประเภทผู้ใช้
     var univId = user.univId; // รหัสพื้นที่
     var departName = user.departName; // ชื่อหน่วยงาน
     var Sender = user.Fname + ' ' + user.Lname; // ผู้ส่ง
 
     this.mainId = this.route.snapshot.paramMap.get('id'); // sign main id
-    let position_id = this.route.snapshot.paramMap.get('tposition'); // take position id
-    this.doc.tpositionId = position_id;
-    
+    let tposition_id = this.route.snapshot.paramMap.get('tposition'); // take position id
+    this.doc.tpositionId = tposition_id;
+
     this.apporvForm = this.fb.group({
       userid: [userId, Validators.required],
       main_id: [this.mainId, Validators.required],
       depart_id: [departId, Validators.required],
+      tposition_id: [tposition_id, Validators.required],
       take_positions: this.fb.array([])
     });
 
@@ -86,7 +89,7 @@ export class OfferApprovComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addTakePosition();
+    //this.addTakePosition();
     this.docDetail(this.mainId);
   }
 
@@ -94,7 +97,7 @@ export class OfferApprovComponent implements OnInit {
   //   return this.dataService.apiApporvDocDetail(main_id)
   //   .subscribe((res: any) => {
   //     var temp = res[0];
-     
+
   //   });
   // }
 
@@ -126,10 +129,10 @@ export class OfferApprovComponent implements OnInit {
 
   // เพิ่ม form ctrl receiver
   addTakePosition() {
-    console.log('this.doc.tpositionId: ',this.tpositionId);
+    console.log('this.doc.tpositionId: ', this.tpositionId);
     const arrayForm = this.fb.group({
-      tposition_id: [this.doc.tpositionId, Validators.required],
-     
+      tposition_id: ['', Validators.required],
+
     })
     this.take_positions.push(arrayForm);
   }
@@ -147,11 +150,11 @@ export class OfferApprovComponent implements OnInit {
   // ลบ
   removeTakePosition(i: number) {
     this.take_positions.removeAt(i);
-  } 
+  }
 
   // ยืนยันเสนอนหนังสือเพื่อลงนาม
   docConfirmApprov() {
-    console.log('doc detail: ', this.doc);
+
     //console.log('create new document: ', this.docNew);
     this.httpClient
       .post<docDetail>(environment.baseUrl + '/send/_approv_doc_add.php', this.doc, {
@@ -161,10 +164,27 @@ export class OfferApprovComponent implements OnInit {
       })
       .subscribe((res: any) => {
         console.log('resig Form: ', res);
-        //this.generatePdfFile();
+        this.docConfirmSequence();
+      });
+  }
 
-        this.router.navigate(['/home']);
-
+  docConfirmSequence() {
+    // var data = {
+    //     mainid: this.doc,
+    //     tpositionid: tposition_id,
+    //     sequtype: sequ_type,
+    //     userid: user_id,
+    //     itemsigner: item_signer
+    // }
+    console.log('doc detail value: ', this.apporvForm.value);
+    this.httpClient.post<any>(environment.baseUrl + '/send/_approv_doc_confirm.php', this.apporvForm.value, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .subscribe((res: any) => {
+        console.log('res ยืนยัน: ', res);
+        //this.router.navigate(['/home']);
       });
   }
 
@@ -181,8 +201,7 @@ export class OfferApprovComponent implements OnInit {
         console.log('resig Form: ', res);
         //this.generatePdfFile();
 
-        this.router.navigate(['/doc-ouside']);
-
+        //this.router.navigate(['/doc-ouside']);
       });
   }
 
@@ -192,7 +211,7 @@ export class OfferApprovComponent implements OnInit {
   //   this.dataService.apiApporvDocDetail(mainid)
   //   .subscribe(items => {
   //       items.map((item: { Total: number; }) => {
-    
+
   //         totalQuestions=item.Total;
   //         console.log(totalQuestions);
   //         subject.next(totalQuestions);
@@ -222,7 +241,10 @@ export interface docDetail {
   docContentWish: any;
   docContentConc: any;
   tpositionId: any;
+  tpositionName: string;
+  positionName: string;
   userMaker: String;
   senderDepart: String;
   destroyYear: String;
+  dateWrite: any;
 }

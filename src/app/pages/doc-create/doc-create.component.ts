@@ -68,6 +68,9 @@ export class DocCreateComponent implements OnInit{
     if(page == 'outside') {
       var text:any = 'สร้างหนังสือภายนอก';
       var link:any = 'doc-outside';
+    } else if(page == 'inside') {
+      var text:any = 'สร้างหนังสือภายใน';
+      var link:any = 'doc-inside';
     }
     this.route_link = {
       "link": link,

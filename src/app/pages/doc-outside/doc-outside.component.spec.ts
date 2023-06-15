@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DocOusideComponent } from './doc-ouside.component';
+import { DocOutsideComponent } from './doc-outside.component';
 
-describe('DocOusideComponent', () => {
-  let component: DocOusideComponent;
-  let fixture: ComponentFixture<DocOusideComponent>;
+describe('DocOutsideComponent', () => {
+  let component: DocOutsideComponent;
+  let fixture: ComponentFixture<DocOutsideComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DocOusideComponent ]
+      declarations: [ DocOutsideComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DocOusideComponent);
+    fixture = TestBed.createComponent(DocOutsideComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

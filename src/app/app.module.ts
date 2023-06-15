@@ -25,11 +25,11 @@ import { DocCreateComponent } from './pages/doc-create/doc-create.component';
 import { PdfLibComponent } from './pages/pdf-lib/pdf-lib.component';
 import { NewdocComponent } from './pages/newdoc/newdoc.component';
 import { DocInsideComponent } from './pages/doc-inside/doc-inside.component';
-import { DocOusideComponent } from './pages/doc-ouside/doc-ouside.component';
 import { OfferSignComponent } from './pages/offer-sign/offer-sign.component';
 import { OfferComponent } from './pages/offer/offer.component';
 import { OfferApprovComponent } from './pages/offer-approv/offer-approv.component';
 import { DocOutsideCreateComponent } from './pages/doc-outside-create/doc-outside-create.component';
+import { DocOutsideComponent } from './pages/doc-outside/doc-outside.component';
 
 @NgModule({
   declarations: [
@@ -46,11 +46,11 @@ import { DocOutsideCreateComponent } from './pages/doc-outside-create/doc-outsid
     PdfLibComponent,
     NewdocComponent,
     DocInsideComponent,
-    DocOusideComponent,
     OfferSignComponent,
     OfferComponent,
     OfferApprovComponent,
-    DocOutsideCreateComponent
+    DocOutsideCreateComponent,
+    DocOutsideComponent
   ],
   imports: [
     BrowserModule,

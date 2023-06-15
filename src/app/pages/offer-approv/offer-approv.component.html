@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="card">
             <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
                     <p class="mb-0">
-                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i>
-                        รายละเอียดหนังสือ
+                        <i class="ni ni-books text-lg opacity-10" aria-hidden="true"></i> &nbsp;
+                        <strong>รายละเอียดหนังสือ</strong>
                     </p>
                     <button class="btn btn-warning btn-sm ms-auto">แก้ไข</button>
                     <button class="btn btn-primary btn-sm ms-auto" (click)="isCollapsed = !isCollapsed"
@@ -67,13 +67,14 @@
                         </div>
                     </div>
 
-
                     <div class="form-group row">
                         <div class="col-md-4">รายละเอียดหนังสือ: &nbsp;</div>
                         <div class="col-md-8">
-                            <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{doc.docContent}}</h6>
+                            <a href="https://e-doc-new.rmutsv.ac.th/apinew/send/_approv_doc_view_inside.php?edoc_id={{doc.edocId}}" target="_blank">
+                                <i class="ni ni-paper-diploma"></i></a>
+                            <!-- <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{doc.docContent}}</h6>
                             <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{doc.docContentWish}}</h6>
-                            <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{doc.docContentConc}}</h6>
+                            <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{doc.docContentConc}}</h6> -->
                         </div>
                     </div>
 
@@ -85,6 +86,21 @@
                     </div>
 
                     <div class="form-group row">
+                        <div class="col-md-4">อายุหนังสือ: &nbsp;</div>
+                        <div class="col-md-8">
+                            <h6>{{doc.destroyYear}} ปี</h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <hr>
+
+                        <p class="mb-0">
+                            <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i> &nbsp;
+                            <strong>ข้อมูลการบันทึก</strong>
+                        </p>
+                    </div>
+                    <div class="form-group row mt-3">
                         <div class="col-md-4">ผู้ดำเนินการ: &nbsp;</div>
                         <div class="col-md-8">
                             <h6>{{doc.userMaker}}</h6>
@@ -94,16 +110,18 @@
                     <div class="form-group row">
                         <div class="col-md-4">หน่วยงาน: &nbsp;</div>
                         <div class="col-md-8">
-                            <h6>{{doc.departName}}</h6>
+                            <h6>{{doc.senderDepart}}</h6>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-4">อายุหนังสือ: &nbsp;</div>
+                        <div class="col-md-4">เวลาบันทึก: &nbsp;</div>
                         <div class="col-md-8">
-                            <h6>{{doc.destroyYear}} ปี</h6>
+                            <h6>{{doc.dateWrite}} น.</h6>
                         </div>
                     </div>
+
+
 
                 </div>
 
@@ -113,7 +131,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="card card-profile">
             <!-- <span class="card-img-top"></span> -->
             <!-- <div class="row justify-content-center">
@@ -126,37 +144,50 @@
                     </div>
                 </div>
             </div> -->
-            <div class="card-header text-center">
+            <div class="card-header text-center bg-gradient-success">
                 <div class="d-flex justify-content-between">
-                    <h6>เลือกผู้บังคับบัญชา และวิธีการเสนอหนังสือ</h6>
+                    <h4>ผู้ลงนาม และยืนยันเสนอลงนาม</h4>
 
                 </div>
 
             </div>
+            <div class="card-body pt-0 mt-3">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group row">
+                            <div class="col-md-12"> <i class="ni ni-circle-08"></i> &nbsp;<h6>{{doc.tpositionName}}</h6>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12"><strong>ตำแหน่ง:</strong> &nbsp;{{doc.positionName}}</div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="d-flex align-items-center">
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-header text-center">
+                <div class="d-flex justify-content-between">
+                    <h6><i class="ni ni-circle-08"></i> เลือกผู้ลงนามถัดไปแบบอัตโนมัติ</h6>
+                </div>
+            </div>
+            
             <div class="card-body pt-0">
                 <div class="row">
                     <div class="col">
                         <form role="form" [formGroup]="apporvForm" autocomplete="on">
                             <div class="form-group row">
-                                <!-- <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" formControlName="secrets"
-                                                value="1">
-                                            <label class="form-check-label" for="inlineRadio1">เสนอแบบกำหนดเอง</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" formControlName="secrets"
-                                                value="2">
-                                            <label class="form-check-label"
-                                                for="inlineRadio2">เสนออัตโนมัติตามลำดับ</label>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="col-md-12">
-                                    <div formArrayName="take_positions" *ngFor="let cards of take_positions.controls; let i=index">
+                                    <div formArrayName="take_positions"
+                                        *ngFor="let cards of take_positions.controls; let i=index">
                                         <div class="form-group row" [formGroupName]="i">
-                                            <div class="col-md-10">
+                                            <div class="col-md-11">
                                                 <select class="form-select" formControlName="tposition_id"
                                                     aria-label="Default select example">
                                                     <option *ngFor="let item of takeposition_list" value="{{item.Id}}">
@@ -164,16 +195,20 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-2">
-                                                <button class="btn btn-secondary btn-sm"
-                                                    (click)="removeTakePosition(i)">ลบ</button>
+                                            <div class="col-md-1">
+                                                <a href="#" (click)="removeTakePosition(i)" alt="ลบ" title="ลบ">
+                                                    <i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+                                                <!-- <button class="btn bg-gradient-danger btn-sm"
+                                                    (click)="removeTakePosition(i)"><i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                                </button> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-6">
-                                            <button class="btn btn-secondary btn-sm"
-                                                (click)="addTakePosition()"><i class="ni ni-fat-add"></i> ลงนามถัดไปแบบอัตโนมัติ</button>
+                                            <button class="btn bg-gradient-secondary btn-sm"
+                                                (click)="addTakePosition()"><i class="ni ni-fat-add"></i> <i
+                                                    class="ni ni-single-02"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -182,15 +217,17 @@
                         </form>
                     </div>
                 </div>
-                <div class="mt-4">
-                    <div>
-                        <hr/>
-                        <div class="col text-end">
-                            <button class="btn btn-primary btn-sm ms-auto"
-                                (click)="docConfirmApprov()"><i class="ni ni-check-bold"></i> ยืนยันเสนอหนังสือเพื่อลงนาม</button>
-                        </div>
+                <div class="row mt-4">
+                    <div class="col-md-4"><a href="https://e-doc-new.rmutsv.ac.th/apinew/send/_approv_doc_view_inside.php?edoc_id={{doc.edocId}}" target="_blank" 
+                        class="btn bg-gradient-secondary"><small>ดูตัวอย่างหนังสือ</small></a></div>
+                    <div class="col text-end">
+                        <button class="btn btn-warning btn-sm ms-auto" (click)="docConfirmApprov()">
+                            <i class="ni ni-check-bold"></i> ยืนยันเสนอหนังสือเพื่อลงนาม</button>
                     </div>
+
+
                 </div>
+
             </div>
         </div>
     </div>
