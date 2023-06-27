@@ -154,7 +154,7 @@
                 <div class="form-group row">
                   
                   <div class="col-md-2">
-                    <button class="btn btn-primary btn-sm" (click)="addReceiver()">เพิ่ม</button>
+                    <button class="btn btn-primary btn-sm" (click)="addReceiver()"><i class="ni ni-fat-add"></i> เพิ่ม</button>
                   </div>
                 </div>
               </div>
@@ -182,8 +182,8 @@
             <div class="col-md-12">
               <div class="form-group" formArrayName="content_wishs">
                 <label for="example-text-input" class="form-control-label">ภาคความประสงค์</label>
-                <div *ngFor="let doc_content_wish of content_wishs.controls; let i=index">
-                  <div class="form-group row" [formGroupName]="i">
+                <div *ngFor="let content_wish of content_wishs.controls; let i=index" [formGroupName]="i">
+                  <div class="form-group row" >
                     <div class="col-md-10">
                       <textarea class="form-control" formControlName="doc_content_wish" [rows]="4">
                       </textarea>
@@ -192,14 +192,29 @@
                       <button class="btn btn-secondary btn-sm" (click)="removeContentWish(i)">ลบ</button>
                     </div>
                   </div>
+
+                  <!-- <h4>หัวข้อย่อย</h4>
+                  <div formArrayName="content_subtopics">
+                    <div *ngFor="let subtopic of getContentSubtopics(content_wish).controls; let j = index" [formGroupName]="j">
+                      <div>
+                        <label>Topic:</label>
+                        <input type="text" formControlName="sub_topic">
+                      </div>
+                     
+                    </div>
+                  </div> -->
                 </div>
 
               </div>
+
+              
+
               <div class="form-group row">
 
-                <div class="col-md-4">
-                  <button class="btn btn-primary btn-sm" (click)="addContentWish()">เพิ่ม</button>
+                <div class="col-md-2">
+                  <button class="btn btn-primary btn-sm" (click)="addContentWish()"><i class="ni ni-fat-add"></i> เพิ่มความประสงค์</button>
                 </div>
+                
               </div>
             </div>
             <div class="col-md-12">

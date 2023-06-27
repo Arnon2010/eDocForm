@@ -42,8 +42,7 @@ export class DocCreateComponent implements OnInit{
     private router: Router,
   ){
 
-    let param_page = this.route.snapshot.paramMap.get('param'); // Route page.
-    this.routerPage(param_page);
+    
     
   }
   ngOnInit(): void {
@@ -56,7 +55,10 @@ export class DocCreateComponent implements OnInit{
     var userType = user.userType;
     //console.log('user: ', user);
 
-    this.dataSend(userType, departId,'2566', 'all', 'notSearch');
+    let param_page = this.route.snapshot.paramMap.get('param'); // Route page.
+    this.routerPage(param_page);
+
+    this.dataSend(userType, departId,'2566', param_page, 'notSearch');
 
     this.amountOrderApplyUnivNumber('2566');
     this.amountOrderApprovSend('2566', departId);

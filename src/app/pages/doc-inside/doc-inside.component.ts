@@ -58,6 +58,7 @@ export class DocInsideComponent implements OnInit {
     receiver: '',
     doc_content: '',
     doc_content_wish: '',
+    doc_content_subtopic: '',
     doc_content_conc: '',
     tposition_id: '',
     sender: '',
@@ -69,6 +70,9 @@ export class DocInsideComponent implements OnInit {
   form = this.fb.group({
     lessons: this.fb.array([])
   });
+
+  content_wish: any;
+
 
   constructor(
     private fb: FormBuilder,
@@ -110,6 +114,7 @@ export class DocInsideComponent implements OnInit {
       headline: ['', Validators.required],
       doc_content: ['', Validators.required],
       content_wishs: this.fb.array([]),
+      
       doc_content_conc: ['', Validators.required],
       comment: ['', Validators.required],
       tposition_id: ['', Validators.required],
@@ -186,9 +191,39 @@ export class DocInsideComponent implements OnInit {
   addContentWish() {
     const contentWishForm = this.fb.group({
       doc_content_wish: ['', Validators.required],
+      content_subtopics: this.fb.array([]),
     })
     this.content_wishs.push(contentWishForm);
   }
+
+  // เพิ่มหัวข้อย่อย
+  getContentSubtopics(subtopic: FormGroup){
+    return subtopic.get('content_subtopics') as FormArray
+  }
+
+  addSubTopic(subtopic: FormGroup<any>) {
+    const topic = this.fb.group({
+      sub_topic: ''
+    })
+    this.getContentSubtopics(subtopic).push(topic);
+  }
+
+  getPhones(address: FormGroup) {
+    return address.get('phones') as FormArray;
+  }
+
+  addPhone(address: FormGroup) {
+    const phone = this.fb.group({
+      number: '',
+      type: ''
+    });
+    this.getPhones(address).push(phone);
+  }
+
+  removePhone(address: FormGroup, index: number) {
+    this.getPhones(address).removeAt(index);
+  }
+
 
   // ลบ
   removeContentWish(i:number) {
@@ -446,6 +481,7 @@ export interface createDocForm {
   receiver: String;
   doc_content: any;
   doc_content_wish: any;
+  doc_content_subtopic: any;
   doc_content_conc: any;
   tposition_id: any;
   sender: String;
@@ -467,6 +503,7 @@ export interface updateDocForm {
   receiver: String;
   doc_content: any;
   doc_content_wish: any;
+  doc_content_subtopic: any;
   doc_content_conc: any;
   tposition_id: any;
   sender: String;

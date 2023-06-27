@@ -18,7 +18,7 @@ import { DocOutsideComponent } from './pages/doc-outside/doc-outside.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'offer-approv/479573/123',
+    redirectTo: 'doc-inside',
     //redirectTo: 'home',
     pathMatch: 'full',
   },

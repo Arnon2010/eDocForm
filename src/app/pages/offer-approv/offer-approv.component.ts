@@ -184,7 +184,7 @@ export class OfferApprovComponent implements OnInit {
     })
       .subscribe((res: any) => {
         console.log('res ยืนยัน: ', res);
-        //this.router.navigate(['/home']);
+        this.router.navigate(['/doc-create/inside']);
       });
   }
 
