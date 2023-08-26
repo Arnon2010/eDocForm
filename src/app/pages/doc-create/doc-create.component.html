@@ -13,7 +13,7 @@
                     </h6>
                     <p class="text-xs text-secondary mb-0">
                       <i class="fas fa-push"></i>
-    
+ 
                       Blank Document
                     </p>
             </div>
@@ -104,7 +104,6 @@
                         <i class="fa fa-clock me-1"></i>
                         05/05/2566
                       </p>
-  
               </div>
             </div>
             <div class="col-4 text-end">
@@ -144,8 +143,10 @@
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ความลับ/เร่งด่วน</th>
                 <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">เรื่อง</th>
                 <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ผู้ดำเนินการ</th>
-                <th class="text-secondary opacity-7"></th>
-                <th class="text-secondary opacity-7"></th>
+                <th class="text-secondary opacity-7">เพิ่มเติม</th>
+                <th class="text-secondary opacity-7">ทำซ้ำ</th>
+                <th class="text-secondary opacity-7">แก้ไข</th>
+
               </tr>
             </thead>
             <tbody>
@@ -165,20 +166,26 @@
                   <p class="text-xs text-secondary mb-0">เรียน: {{doc.Receiver}}</p>
                 </td>
                 <td>
-                  <p class="text-xs font-weight-bold mb-0">{{doc.Sender}}</p>
+                  <p class="text-xs font-weight-bold mb-0">{{doc.userFullname}}</p>
                 </td>
-                <td class="align-middle">
+                <td class="align-middle text-center">
                   <a href="javascript:;" class="font-weight-bold text-xs badge badge-sm bg-warning" data-toggle="tooltip" data-original-title="view file">
                       <i class="fas fa-file"></i>
                   </a>
                 </td>
-                <td class="align-middle">
-                  <a href="javascript:;" class="font-weight-bold text-xs badge badge-sm bg-primary" data-toggle="tooltip" data-original-title="coppy">
+                <td class="align-middle text-center">
+                  <a href="javascript:;" (click)="copyDoc(doc.edocId)" class="font-weight-bold text-xs badge badge-sm bg-primary" data-toggle="tooltip" data-original-title="coppy">
                       <i class="fas fa-copy"></i>
                   </a>
+
                   <!-- <button class="btn btn-outline-info btn-sm text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-tag" aria-hidden="true"></i>
                   </button> -->
+                </td>
+                <td class="align-middle text-center">
+                  <a href="#" routerLink="/{{route_link.link}}/edit/{{doc.edocId}}" class="font-weight-bold text-xs badge badge-sm bg-warning" data-toggle="tooltip" data-original-title="view file">
+                      <i class="ni ni-settings"></i>
+                  </a>
                 </td>
                 
               </tr>

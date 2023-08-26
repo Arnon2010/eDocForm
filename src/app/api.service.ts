@@ -144,6 +144,16 @@ export class ApiService {
     );
   }
 
+  // ข้อมูลหนังสือ
+  public apiDocData(edoc_id:any) {
+    let api = environment.baseUrl + '/send/_doc_data.php?edoc_id=' + edoc_id;
+    return this.httpClient.get(api, { headers: this.headers })
+    .pipe(map((res:any) => {
+        return res.data || [];
+    }),
+    catchError(this.handleError)
+    );
+  }
 
 
   //test student

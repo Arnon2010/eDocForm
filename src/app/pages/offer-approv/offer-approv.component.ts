@@ -155,7 +155,7 @@ export class OfferApprovComponent implements OnInit {
   // ยืนยันเสนอนหนังสือเพื่อลงนาม
   docConfirmApprov() {
 
-    //console.log('create new document: ', this.docNew);
+    console.log('create new document: ', this.doc);
     this.httpClient
       .post<docDetail>(environment.baseUrl + '/send/_approv_doc_add.php', this.doc, {
         headers: {

@@ -33,6 +33,7 @@ export class DocCreateComponent implements OnInit{
   buttonText: string = 'Loading...';
 
   route_link:any = [];
+  userId: any;
 
   constructor(
     private httpClient:HttpClient,
@@ -53,7 +54,9 @@ export class DocCreateComponent implements OnInit{
     let user = JSON.parse(token);
     var departId = user.departId;
     var userType = user.userType;
-    //console.log('user: ', user);
+    var userId = user.userId;
+    this.userId = userId;
+    console.log('user: ', user);
 
     let param_page = this.route.snapshot.paramMap.get('param'); // Route page.
     this.routerPage(param_page);
@@ -140,4 +143,16 @@ export class DocCreateComponent implements OnInit{
           this.orderApprovSend = res.data[0].amountOrder;
       });
   }
+
+  /** ทำเอกสารหรือหนังสือซ้ำ */
+  copyDoc(edoc_id: any) {
+    this.httpClient.get(environment.baseUrl + "/send/_copy_document.php?edoc_id=" + edoc_id 
+    + '&user_id=' + this.userId
+    ).subscribe((res:any) => {
+    console.log('resp: ', res);
+        this.ngOnInit();
+    });
+  }
+
+  
 }

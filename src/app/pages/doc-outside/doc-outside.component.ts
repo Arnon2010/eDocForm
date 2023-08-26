@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 

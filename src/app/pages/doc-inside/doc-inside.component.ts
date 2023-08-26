@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../api.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
@@ -44,13 +44,15 @@ export class DocInsideComponent implements OnInit {
 
   isChecked: boolean = true; // Set the initial state of the checkbox
 
-  docNew: createDocForm = {
+  docNew: DocForm = {
+    edocid: '',
     userid: 0,
     docdate: '',
     doctype: '2',
     secrets: '1',
     rapid: '1',
     depart_id_user: 0,
+    depart_id_agency:0,
     depart_government: '',
     contact: '',
     comment: '',
@@ -72,6 +74,8 @@ export class DocInsideComponent implements OnInit {
   });
 
   content_wish: any;
+  action: any;
+  edocId: any;
 
 
   constructor(
@@ -80,7 +84,8 @@ export class DocInsideComponent implements OnInit {
     private router: Router,
     private elementRef: ElementRef,
     private httpClient: HttpClient,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute
   ) {
     //get user profile
     const token: any = this.dataService.getToken();
@@ -114,7 +119,6 @@ export class DocInsideComponent implements OnInit {
       headline: ['', Validators.required],
       doc_content: ['', Validators.required],
       content_wishs: this.fb.array([]),
-      
       doc_content_conc: ['', Validators.required],
       comment: ['', Validators.required],
       tposition_id: ['', Validators.required],
@@ -147,8 +151,33 @@ export class DocInsideComponent implements OnInit {
     this.addReceiver(); // เรียน
     this.addContentWish(); // เนื้อหาหนังสือ ความประสงค์
 
+    this.router.url === '/doc-inside';
+
+
+    this.route.url.subscribe(segments => {
+      const path = segments.map(segments => segments.path).join('/');
+      console.log('Current route path:',path);
+    })
+
+    this.action = this.route.snapshot.paramMap.get('action'); // Route page.
+    this.edocId = this.route.snapshot.paramMap.get('param'); // Route page.
+    console.log('edocId:',this.edocId);
+
+    //กรณีแก้ไข
+    if(this.action == 'edit') {
+      this.getDocData(this.edocId);
+    }
   }
 
+  // รายละเอียดหนังสือ
+  getDocData(edoc_id: any) {
+    this.dataService.apiDocData(edoc_id)
+      .subscribe((res: any) => {
+        var temp = res[0];
+        this.docNew = temp;
+        console.log('doc data: ', this.docNew);
+      })
+  }
 
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
@@ -367,7 +396,7 @@ export class DocInsideComponent implements OnInit {
   createNewDocument() {
     //console.log('create new document: ', this.creatForm.value);
     this.httpClient
-      .post<createDocForm>(environment.baseUrl + '/send/_approv_document.php', this.creatForm.value, {
+      .post<DocForm>(environment.baseUrl + '/send/_approv_document.php', this.creatForm.value, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -386,7 +415,7 @@ export class DocInsideComponent implements OnInit {
   createPDF() {
     //console.log('create new document: ', this.docNew);
     this.httpClient
-      .post<createDocForm>(environment.baseUrl + '/send/_create_pdf_document.php', this.docNew, {
+      .post<DocForm>(environment.baseUrl + '/send/_create_pdf_document.php', this.docNew, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -399,6 +428,7 @@ export class DocInsideComponent implements OnInit {
 
       });
   }
+
 
   generatePdfFile() {
     var pdf = new jsPDF("p", "mm", "a4");
@@ -453,7 +483,7 @@ export class DocInsideComponent implements OnInit {
   testStd() {
 
     this.httpClient
-      .post<createDocForm>('https://sis.rmutsv.ac.th/sis/api/pdo_mysql_std_dev.php', { "opt": "readone", "g_student": "163401040079" }, {
+      .post<DocForm>('https://sis.rmutsv.ac.th/sis/api/pdo_mysql_std_dev.php', { "opt": "readone", "g_student": "163401040079" }, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -467,13 +497,15 @@ export class DocInsideComponent implements OnInit {
 
 }
 
-export interface createDocForm {
+export interface DocForm {
+  edocid: String;
   userid: Number;
   docdate: String;
   doctype: String;
   secrets: String;
   rapid: String;
   depart_id_user: Number;
+  depart_id_agency: Number;//รหัสหน่วยงานส่วนราชการ กรณีใช้เลขหนังสือมหาลัย
   depart_government: string;
   contact: string;
   comment: string;
@@ -489,24 +521,24 @@ export interface createDocForm {
   destroy_year: String;
 }
 
-export interface updateDocForm {
-  userid: Number;
-  docdate: String;
-  doctype: String;
-  secrets: String;
-  rapid: String;
-  depart_id_user: String;
-  depart_government: string;
-  contact: string;
-  comment: string;
-  headline: String;
-  receiver: String;
-  doc_content: any;
-  doc_content_wish: any;
-  doc_content_subtopic: any;
-  doc_content_conc: any;
-  tposition_id: any;
-  sender: String;
-  senderdepart: String;
-  destroy_year: String;
-}
+// export interface updateDocForm {
+//   userid: Number;
+//   docdate: String;
+//   doctype: String;
+//   secrets: String;
+//   rapid: String;
+//   depart_id_user: String;
+//   depart_government: string;
+//   contact: string;
+//   comment: string;
+//   headline: String;
+//   receiver: String;
+//   doc_content: any;
+//   doc_content_wish: any;
+//   doc_content_subtopic: any;
+//   doc_content_conc: any;
+//   tposition_id: any;
+//   sender: String;
+//   senderdepart: String;
+//   destroy_year: String;
+// }

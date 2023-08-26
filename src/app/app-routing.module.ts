@@ -18,8 +18,8 @@ import { DocOutsideComponent } from './pages/doc-outside/doc-outside.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'doc-inside',
-    //redirectTo: 'home',
+    //redirectTo: 'doc-inside',
+    redirectTo: 'doc-inside/edit/387596',
     pathMatch: 'full',
   },
   {path: 'home', component: HomeComponent},
@@ -32,6 +32,7 @@ const routes: Routes = [
   {path: 'doc-create/:param', component: DocCreateComponent},
   {path: 'newdoc', component:NewdocComponent},
   {path: 'doc-inside', component:DocInsideComponent},
+  {path: 'doc-inside/:action/:param', component:DocInsideComponent},
   {path: 'doc-outside', component:DocOutsideComponent},
   {path: 'offer', component:OfferComponent},
   {path: 'offer-sign/:id', component:OfferSignComponent},
